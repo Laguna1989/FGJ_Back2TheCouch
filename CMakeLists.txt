@@ -3,7 +3,7 @@ cmake_minimum_required (VERSION 2.6)
 #####################################################
 ## Variables to be set depending on project
 #####################################################
-set (PROJECTNAME "MyAwesomeGame") 
+set (PROJECTNAME "Back2TheCouch") 
 
 set (GAMEFILES 
 	src/GameProperties.hpp
