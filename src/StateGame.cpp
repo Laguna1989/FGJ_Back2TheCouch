@@ -47,4 +47,6 @@ void StateGame::doCreate()
 
 void StateGame::doCreateInternal()
 {
+    m_player = std::make_shared<Player>();
+    add(m_player);
 }

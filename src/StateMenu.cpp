@@ -16,6 +16,8 @@ void StateMenu::doInternalUpdate(float const elapsed)
         using ip = JamTemplate::InputManager;
         if (ip::justPressed(sf::Keyboard::Key::Space) || ip::justPressed(sf::Keyboard::Key::Return)) {
 
+            auto func = [](int b) { int a = 5;  a+=b; };
+
             m_starting = true;
             auto tw = JamTemplate::TweenAlpha<JamTemplate::SmartShape>::create(m_overlay, 0.5f, sf::Uint8 { 0 }, sf::Uint8 { 255 });
             tw->setSkipFrames();

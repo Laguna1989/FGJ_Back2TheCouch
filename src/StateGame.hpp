@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "JamTemplate/GameState.hpp"
+#include "Player.hpp"
 
 // fwd decls
 namespace JamTemplate {
@@ -24,6 +25,7 @@ protected:
 private:
     std::shared_ptr<JamTemplate::SmartShape> m_background;
     std::shared_ptr<JamTemplate::SmartShape> m_overlay;
+    std::shared_ptr<Player> m_player;
 
     void doCreate() override;
 

@@ -11,10 +11,13 @@ set (GAMEFILES
 	src/Hud.hpp
 	src/Hud.cpp
 	src/main.cpp
+	src/Player.cpp
+	src/Player.hpp
 	src/StateGame.hpp
 	src/StateGame.cpp
 	src/StateMenu.hpp
 	src/StateMenu.cpp
+	
 	)
 
 #####################################################
