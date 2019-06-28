@@ -24,7 +24,7 @@ public:
     static sf::Color PaletteFlashGreen() { return sf::Color { 51, 143, 63 }; };
     static sf::Color PaletteFlashRed() { return sf::Color { 143, 33, 33 }; };
 
-    static std::string GameName() { return "MyAwesomeGame"; };
+    static std::string GameName() { return "Back 2 The Couch"; };
 };
 
 #endif
