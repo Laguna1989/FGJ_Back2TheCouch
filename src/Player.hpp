@@ -21,7 +21,7 @@ private:
     JamTemplate::Animation::Sptr m_sprite;
 
     JamTemplate::SmartShape::Sptr m_collider;
-    bool m_drawCollider { false };
+    bool m_drawCollider { true };
 
     virtual void doUpdate(float const /*elapsed*/);
     virtual void doDraw() const;

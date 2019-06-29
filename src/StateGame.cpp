@@ -51,7 +51,6 @@ void StateGame::doCreate()
 
 void StateGame::doCreateInternal()
 {
-
     b2BodyDef playerBodyDef;
     playerBodyDef.fixedRotation = true;
     playerBodyDef.allowSleep = false;
