@@ -59,6 +59,13 @@ void Player::doUpdate(float const elapsed)
 
     m_closeCombatAttackArea->setPosition(getPosition());
     m_closeCombatAttackArea->update(elapsed);
+
+    if (getPosition().x <= 0) {
+        setPosition(sf::Vector2f(0, getPosition().y));
+    }
+    if (getPosition().x >= getGame()->getRenderTarget()->getSize().x - GP::SpriteSize()) {
+        setPosition(sf::Vector2f(getGame()->getRenderTarget()->getSize().x - GP::SpriteSize(), getPosition().y));
+    }
 }
 
 void Player::updateShot(float const elapsed)

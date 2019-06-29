@@ -24,6 +24,7 @@ public:
         : JamTemplate::Box2DObject { world, def }
         , m_x(x)
         , m_y(y)
+        , m_type { ty }
     {
     }
     ~Tile() = default;
@@ -40,7 +41,7 @@ public:
 private:
     void updatePosition()
     {
-        setPosition(sf::Vector2f(static_cast<float>(m_x * GP::SpriteSize()), static_cast<float>(m_y * GP::SpriteSize())));
+        setPosition(sf::Vector2f(static_cast<float>(m_x * GP::SpriteSize()), static_cast<float>(m_y * static_cast<int>(GP::SpriteSize()))));
         m_sprite->setPosition(getPosition());
     }
 

@@ -15,7 +15,16 @@ Level::Level(StateGame& sg)
 void Level::LoadLevel(std::string const& fileName)
 {
     auto levelImage = JamTemplate::TextureManager::get(fileName).copyToImage();
-
+    // border
+    for (int i = -1; i != static_cast<int>(levelImage.getSize().x); ++i) {
+        AddTile(i, -1, TileType::TileType::Platform);
+        AddTile(i, levelImage.getSize().y, TileType::TileType::Platform);
+    }
+    for (int j = -1; j != static_cast<int>(levelImage.getSize().y); ++j) {
+        AddTile(-1, j, TileType::TileType::Platform);
+        AddTile(levelImage.getSize().x, j, TileType::TileType::Platform);
+    }
+    // image
     for (unsigned int x = 0; x != levelImage.getSize().x; ++x) {
         for (unsigned int y = 0; y != levelImage.getSize().y; ++y) {
             sf::Color c = levelImage.getPixel(x, y);
@@ -27,14 +36,6 @@ void Level::LoadLevel(std::string const& fileName)
                 m_spawnPositions.emplace_back(sf::Vector2i { static_cast<int>(x), static_cast<int>(y) });
             }
         }
-    }
-    for (int i = 0; i != levelImage.getSize().x; ++i) {
-        AddTile(i, -1, TileType::TileType::Platform);
-        AddTile(i, levelImage.getSize().y, TileType::TileType::Platform);
-    }
-    for (int j = -1; j != levelImage.getSize().y; ++j) {
-        AddTile(0, j, TileType::TileType::Platform);
-        AddTile(levelImage.getSize().x, j, TileType::TileType::Platform);
     }
 }
 
