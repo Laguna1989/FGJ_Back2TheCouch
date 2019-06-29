@@ -19,7 +19,7 @@ Player::Player(StateGame& sg, const b2BodyDef* def, int id)
 void Player::setB2Obj()
 {
     b2PolygonShape dynamicBox;
-    dynamicBox.SetAsBox(static_cast<float32>(GP::SpriteSize()) / 2.0f, static_cast<float32>(GP::SpriteSize()) / 2.0f);
+    dynamicBox.SetAsBox(static_cast<float32>(GP::SpriteSize()) / 2.0f - 2.5, static_cast<float32>(GP::SpriteSize()) / 2.0f);
 
     b2FixtureDef fixtureDef;
 
@@ -138,8 +138,8 @@ void Player::updateMovement(float const elapsed)
 void Player::SpawnShot()
 {
     m_shotTimer = GP::ShotTimer();
-    sf::Vector2f ofs { 0, 0 };
-    sf::Vector2f vel { GP::ShotVelocity(), 0 };
+    sf::Vector2f ofs { 0, -4 };
+    sf::Vector2f vel { GP::ShotVelocity(), JamTemplate::Random::getFloat(-10, 10) };
     if (m_facingRight) {
         ofs.x += GP::SpriteSize();
     } else {

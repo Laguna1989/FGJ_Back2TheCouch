@@ -31,10 +31,10 @@ public:
     JamTemplate::Animation::Sptr getSprite();
 
     bool m_collided { false };
+    bool m_movementStarted { false };
 
 private:
     JamTemplate::Animation::Sptr m_sprite;
-    bool m_movementStarted { false };
 
     StateGame& m_stateGame;
 

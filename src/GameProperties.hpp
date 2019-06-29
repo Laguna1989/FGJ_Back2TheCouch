@@ -38,7 +38,7 @@ public:
 
     static float PlayerMovementAcceleration() { return 65000.0f; };
     static float PlayerFriction() { return 0.01f; };
-    static float PlayerDensity() { return 1.0f; };
+    static float PlayerDensity() { return 1.0f * 6.0f / 3.5f; };
     static float PlayerMaxSpeedHorizontal() { return 125.0f; };
     static float PlayerMaxSpeedVertical() { return 500.0f; };
     static float PlayerJumpImpulse() { return 85000.0f; };
@@ -47,8 +47,10 @@ public:
     static float TileFriction() { return 0.48f; };
     static float TileDensity() { return 1.0f; };
 
-    static float ShotVelocity() { return 200; };
-    static float ShotTimer() { return 0.25; }
+
+    static float ShotVelocity() { return 250; };
+    static float ShotTimer() { return 0.25; };
+    static float ShotInvincibleTime() { return 0.1f; };
 
     static float LavaRiseSpeed() { return 5.0f; };
     static float LavaStartTime() { return 2.0f; };
