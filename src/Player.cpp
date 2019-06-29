@@ -33,8 +33,11 @@ void Player::setB2Obj()
 void Player::doCreate()
 {
     m_sprite = std::make_shared<JamTemplate::Animation>();
-    m_sprite->add("assets/player.png", "idle", sf::Vector2u { GP::SpriteSize(), GP::SpriteSize() }, JamTemplate::MathHelper::vectorBetween(0U, 0U), 0.15f);
-    m_sprite->add("assets/player.png", "walk", sf::Vector2u { GP::SpriteSize(), GP::SpriteSize() }, JamTemplate::MathHelper::vectorBetween(0U, 3U), 0.1f);
+
+    std::string loaderName = "#r#assets/player.png#" + std::to_string(m_id);
+
+    m_sprite->add(loaderName, "idle", sf::Vector2u { GP::SpriteSize(), GP::SpriteSize() }, JamTemplate::MathHelper::vectorBetween(0U, 0U), 0.15f);
+    m_sprite->add(loaderName, "walk", sf::Vector2u { GP::SpriteSize(), GP::SpriteSize() }, JamTemplate::MathHelper::vectorBetween(0U, 3U), 0.1f);
     m_sprite->play("idle");
 
     m_closeCombatAttackArea
