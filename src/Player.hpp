@@ -4,6 +4,7 @@
 #include "JamTemplate/Animation.hpp"
 #include "JamTemplate/Box2DObject.hpp"
 #include "JamTemplate/SmartShape.hpp"
+#include "PlayerInput.hpp"
 #include <Box2D/Box2D.h>
 
 // forward declaration
@@ -18,6 +19,7 @@ public:
 private:
     StateGame& m_gameState;
     int m_id { 0 };
+    PlayerInput m_input;
 
     JamTemplate::Animation::Sptr m_sprite;
 

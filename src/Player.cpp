@@ -10,6 +10,7 @@ Player::Player(StateGame& sg, const b2BodyDef* def, int id)
     : m_gameState(sg)
     , JamTemplate::Box2DObject { sg.getWorld(), def }
     , m_id { id }
+    , m_input { id }
 {
     setB2Obj();
 }
@@ -62,13 +63,11 @@ void Player::doDraw() const
 
 void Player::updateMovement(float const elapsed)
 {
-    using im = JamTemplate::InputManager;
-    using k = sf::Keyboard::Key;
-    if (im::pressed(k::A) || im::pressed(k::Left)) {
+
+    if (m_input.isLeftPressed()) {
         getB2Body()->ApplyForceToCenter(b2Vec2 { -GP::PlayerMovementAcceleration(), 0 }, true);
     }
-    if (im::pressed(k::D) || im::pressed(k::Right)) {
+    if (m_input.isRightPressed()) {
         getB2Body()->ApplyForceToCenter(b2Vec2 { GP::PlayerMovementAcceleration(), 0 }, true);
     }
-    
 }
