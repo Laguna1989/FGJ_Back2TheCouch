@@ -11,7 +11,7 @@ class StateGame;
 
 class Player : public JamTemplate::Box2DObject {
 public:
-    Player::Player(StateGame& sg, const b2BodyDef* def);
+    Player(StateGame& sg, const b2BodyDef* def);
 
     void setB2Obj();
 

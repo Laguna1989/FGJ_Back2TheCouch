@@ -10,7 +10,7 @@
 void StateGame::doInternalUpdate(float const elapsed)
 {
     m_overlay->update(elapsed);
-    m_world->Step(elapsed, GP::velocityIterations(), GP::positionIterations());
+    m_world->Step(elapsed, GP::PhysicVelocityIterations(), GP::PhysicPositionIterations());
 }
 
 void StateGame::doInternalDraw() const
@@ -23,7 +23,7 @@ void StateGame::doInternalDraw() const
 void StateGame::doCreate()
 {
 
-    m_world->SetGravity(b2Vec2 { 0, 1000 });
+    m_world->SetGravity(b2Vec2 { 0, 10 });
 
     float w = static_cast<float>(getGame()->getRenderTarget()->getSize().x);
     float h = static_cast<float>(getGame()->getRenderTarget()->getSize().y);

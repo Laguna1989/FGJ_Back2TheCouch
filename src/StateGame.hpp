@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "JamTemplate/GameState.hpp"
+#include "Level.hpp"
 #include "Player.hpp"
 
 // fwd decls
@@ -34,6 +35,7 @@ private:
     std::shared_ptr<JamTemplate::SmartShape> m_background;
     std::shared_ptr<JamTemplate::SmartShape> m_overlay;
     std::shared_ptr<Player> m_player;
+    std::shared_ptr<Level> m_level;
 
     void doCreate() override;
 

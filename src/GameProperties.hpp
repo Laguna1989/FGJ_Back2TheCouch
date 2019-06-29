@@ -26,8 +26,10 @@ public:
 
     static std::string GameName() { return "Back 2 The Couch"; };
 
-    static std::int32_t velocityIterations() { return 2; };
-    static std::int32_t positionIterations() { return 2; };
+    static std::int32_t PhysicVelocityIterations() { return 2; };
+    static std::int32_t PhysicPositionIterations() { return 2; };
+
+    static float TileSpriteSize() { return 12; };
 };
 
 #endif

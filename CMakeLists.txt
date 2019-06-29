@@ -10,6 +10,8 @@ set (GAMEFILES
 	src/GameProperties.cpp
 	src/Hud.hpp
 	src/Hud.cpp
+	src/Level.cpp
+	src/Level.hpp
 	src/main.cpp
 	src/Player.cpp
 	src/Player.hpp
@@ -17,7 +19,7 @@ set (GAMEFILES
 	src/StateGame.cpp
 	src/StateMenu.hpp
 	src/StateMenu.cpp
-	
+	src/Tile.hpp
 	)
 
 #####################################################
