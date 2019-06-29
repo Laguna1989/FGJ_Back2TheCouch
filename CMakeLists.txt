@@ -10,6 +10,8 @@ set (GAMEFILES
 	src/GameProperties.cpp
 	src/Hud.hpp
 	src/Hud.cpp
+	src/Lava.cpp
+	src/Lava.hpp
 	src/Level.cpp
 	src/Level.hpp
 	src/main.cpp

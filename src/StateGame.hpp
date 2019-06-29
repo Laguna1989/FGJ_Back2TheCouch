@@ -3,6 +3,7 @@
 
 #include "JamTemplate/GameState.hpp"
 #include "JamTemplate/ObjectGroup.hpp"
+#include "Lava.hpp"
 #include "Level.hpp"
 #include "Player.hpp"
 #include <Box2D/Box2D.h>
@@ -32,6 +33,7 @@ protected:
 
 private:
     std::shared_ptr<b2World> m_world { nullptr };
+    std::shared_ptr<Lava> m_lava;
     std::shared_ptr<JamTemplate::SmartShape> m_overlay;
     JamTemplate::ObjectGroup<Player>::Sptr m_players;
     std::shared_ptr<Level> m_level;

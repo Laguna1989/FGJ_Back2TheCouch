@@ -47,8 +47,9 @@ public:
     static float TileFriction() { return 0.48f; };
     static float TileDensity() { return 1.0f; };
 
-    static float LavaStartTime() { return 10.0f; };
-    static float LavaStopTime() { return 75.0f; };
+    static float LavaRiseSpeed() { return 5.0f; };
+    static float LavaStartTime() { return 5.0f; };
+    static float LavaStopTime() { return 20.0f; };
     static float TotalGameTime() { return 100.0f; };
 };
 

@@ -17,6 +17,7 @@ void StateGame::doInternalDraw() const
 {
     drawObjects();
     m_overlay->draw(getGame()->getRenderTarget());
+    m_lava->draw();
     m_hud->draw();
 }
 
@@ -53,6 +54,9 @@ void StateGame::doCreateInternal()
     add(m_players);
     AddPlayer(0);
     AddPlayer(1);
+
+    m_lava = std::make_shared<Lava>(*this, 2143);
+    add(m_lava);
 }
 
 void StateGame::AddPlayer(int id)
