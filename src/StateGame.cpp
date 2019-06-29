@@ -62,6 +62,7 @@ void StateGame::AddPlayer(int id)
     playerBodyDef.type = b2_dynamicBody;
 
     auto player = std::make_shared<Player>(*this, &playerBodyDef, id);
+    player->setPosition(m_level->getSpawnPosition(id));
     add(player);
     m_players->emplace_back(player);
 }

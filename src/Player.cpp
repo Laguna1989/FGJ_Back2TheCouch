@@ -32,7 +32,6 @@ void Player::setB2Obj()
 
 void Player::doCreate()
 {
-    setPosition(sf::Vector2f { 20, 14 });
     m_sprite = std::make_shared<JamTemplate::Animation>();
     m_sprite->add("assets/coin.png", "idle", sf::Vector2u { GP::SpriteSize(), GP::SpriteSize() }, JamTemplate::MathHelper::vectorBetween(0U, 11U), 0.15f);
     m_sprite->play("idle");
