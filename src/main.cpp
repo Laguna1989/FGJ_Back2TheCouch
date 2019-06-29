@@ -16,8 +16,8 @@ int main()
     game->switchState(std::make_shared<StateMenu>());
     sf::Clock clock;
 
-    JamTemplate::TextureManager::addselectiveColorReplacement(0, { std::make_pair(sf::Color { 23, 255, 0 }, sf::Color { 0, 0, 255 }) });
-    JamTemplate::TextureManager::addselectiveColorReplacement(1, { std::make_pair(sf::Color { 23, 255, 0 }, sf::Color { 255, 0, 0 }) });
+    JamTemplate::TextureManager::addselectiveColorReplacement(0, { std::make_pair(sf::Color { 23, 255, 0 }, GP::Player1PrimaryColor()), std::make_pair(sf::Color { 255, 0, 139 }, GP::Player1SecondaryColor()), std::make_pair(sf::Color { 101, 0, 55 }, GP::Player1TertiaryColor()) });
+    JamTemplate::TextureManager::addselectiveColorReplacement(1, { std::make_pair(sf::Color { 23, 255, 0 }, GP::Player2PrimaryColor()), std::make_pair(sf::Color { 255, 0, 139 }, GP::Player2SecondaryColor()), std::make_pair(sf::Color { 101, 0, 55 }, GP::Player2TertiaryColor()) });
 
     while (window->isOpen()) {
         sf::Time elapsed = clock.restart();

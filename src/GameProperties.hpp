@@ -18,6 +18,13 @@ public:
     static unsigned int PlayfieldHeight() { return 600; }
     static unsigned int PixelScalingFactor() { return 3; }
 
+    static sf::Color Player1PrimaryColor() { return sf::Color { 121, 65, 0 }; };
+    static sf::Color Player1SecondaryColor() { return sf::Color { 219, 65, 195 }; };
+    static sf::Color Player1TertiaryColor() { return sf::Color { 154, 32, 121 }; };
+    static sf::Color Player2PrimaryColor() { return sf::Color { 255, 162, 0 }; };
+    static sf::Color Player2SecondaryColor() { return sf::Color { 97, 211, 227 }; };
+    static sf::Color Player2TertiaryColor() { return sf::Color { 65, 146, 195 }; };
+
     static sf::Color PaletteBackground() { return sf::Color { 14, 16, 20 }; };
     static sf::Color PaletteFontFront() { return sf::Color { 248, 249, 254 }; };
     static sf::Color PaletteFontShadow(sf::Uint8 a = 255) { return sf::Color { 26, 29, 36, a }; };
