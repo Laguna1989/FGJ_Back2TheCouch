@@ -21,6 +21,9 @@ void Level::LoadLevel(std::string const& fileName)
             if (c == sf::Color::White) {
                 AddTile(x, y, TileType::TileType::Platform);
             }
+            if (c.r == 1 && c.g == 255 && c.b == 0) {
+                m_spawnPositions.emplace_back(sf::Vector2i { x, y });
+            }
         }
     }
 }
@@ -46,4 +49,12 @@ void Level::doUpdate(float const elapsed)
 }
 void Level::doDraw() const
 {
+}
+
+sf::Vector2f Level::getSpawnPosition(int id) const
+{
+    id = id % m_spawnPositions.size();
+
+    auto pi = m_spawnPositions.at(id);
+    return sf::Vector2f { static_cast<float>(GP::SpriteSize() * pi.x), static_cast<float>(GP::SpriteSize() * pi.y) };
 }

@@ -6,9 +6,11 @@
 #include "StateGame.hpp"
 #include <iostream>
 
-Player::Player(StateGame& sg, const b2BodyDef* def)
+Player::Player(StateGame& sg, const b2BodyDef* def, int id)
     : m_gameState(sg)
     , JamTemplate::Box2DObject { sg.getWorld(), def }
+    , m_id { id }
+    , m_input { id }
 {
     setB2Obj();
 }
@@ -30,7 +32,6 @@ void Player::setB2Obj()
 
 void Player::doCreate()
 {
-    setPosition(sf::Vector2f { 20, 14 });
     m_sprite = std::make_shared<JamTemplate::Animation>();
     m_sprite->add("assets/tile.png", "idle", sf::Vector2u { GP::SpriteSize(), GP::SpriteSize() }, JamTemplate::MathHelper::vectorBetween(0U, 1U), 0.15f);
     m_sprite->play("idle");
@@ -63,12 +64,11 @@ void Player::doDraw() const
 
 void Player::updateMovement(float const elapsed)
 {
-    using im = JamTemplate::InputManager;
-    using k = sf::Keyboard::Key;
-    if (im::pressed(k::A) || im::pressed(k::Left)) {
+
+    if (m_input.isLeftPressed()) {
         getB2Body()->ApplyForceToCenter(b2Vec2 { -GP::PlayerMovementAcceleration(), 0 }, true);
     }
-    if (im::pressed(k::D) || im::pressed(k::Right)) {
+    if (m_input.isRightPressed()) {
         getB2Body()->ApplyForceToCenter(b2Vec2 { GP::PlayerMovementAcceleration(), 0 }, true);
     }
 

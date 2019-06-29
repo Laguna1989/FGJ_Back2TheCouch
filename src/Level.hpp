@@ -14,11 +14,15 @@ public:
 
     void LoadLevel(std::string const& fileName);
 
+    sf::Vector2f getSpawnPosition(int id) const;
+
 private:
     StateGame& m_gameState;
     JamTemplate::SmartSprite::Sptr m_backgroundImage;
 
     JamTemplate::ObjectGroup<Tile> m_tiles;
+    std::vector<sf::Vector2i> m_spawnPositions;
+
     void AddTile(int x, int y, TileType::TileType type);
 
     virtual void

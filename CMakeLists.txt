@@ -15,6 +15,7 @@ set (GAMEFILES
 	src/main.cpp
 	src/Player.cpp
 	src/Player.hpp
+	src/PlayerInput.hpp
 	src/StateGame.hpp
 	src/StateGame.cpp
 	src/StateMenu.hpp
