@@ -11,6 +11,7 @@ public:
 
     void AddScoreP1(int i = 1);
     void AddScoreP2(int i = 1);
+    void SetTime(float totalTime);
 
 private:
     int m_scoreP1 { -1 };
@@ -18,6 +19,7 @@ private:
 
     JamTemplate::SmartText::Sptr m_scoreP1Text;
     JamTemplate::SmartText::Sptr m_scoreP2Text;
+    JamTemplate::SmartText::Sptr m_timerText;
 
     void doUpdate(float const elapsed) override;
 

@@ -14,6 +14,10 @@ public:
     static float GameBoardInputOffsetMax() { return 300; }
     static unsigned int GameBoardMaxParse() { return 20; }
 
+    static unsigned int PlayfieldWidth() { return 800; }
+    static unsigned int PlayfieldHeight() { return 600; }
+    static unsigned int PixelScalingFactor() { return 3; }
+
     static sf::Color PaletteBackground() { return sf::Color { 14, 16, 20 }; };
     static sf::Color PaletteFontFront() { return sf::Color { 248, 249, 254 }; };
     static sf::Color PaletteFontShadow(sf::Uint8 a = 255) { return sf::Color { 26, 29, 36, a }; };
@@ -42,6 +46,10 @@ public:
 
     static float TileFriction() { return 0.48f; };
     static float TileDensity() { return 1.0f; };
+
+    static float LavaStartTime() { return 10.0f; };
+    static float LavaStopTime() { return 75.0f; };
+    static float TotalGameTime() { return 100.0f; };
 };
 
 #endif

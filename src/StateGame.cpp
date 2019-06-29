@@ -17,6 +17,7 @@ void StateGame::doInternalDraw() const
 {
     drawObjects();
     m_overlay->draw(getGame()->getRenderTarget());
+    m_hud->draw();
 }
 
 void StateGame::doCreate()
