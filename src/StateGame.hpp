@@ -1,14 +1,14 @@
 #ifndef GAME_STATE_GAME_HPP_INCLUDEGUARD
 #define GAME_STATE_GAME_HPP_INCLUDEGUARD
 
+#include "JamTemplate/GameState.hpp"
+#include "JamTemplate/ObjectGroup.hpp"
+#include "Level.hpp"
+#include "Player.hpp"
 #include <Box2D/Box2D.h>
 #include <iostream>
 #include <memory>
 #include <vector>
-
-#include "JamTemplate/GameState.hpp"
-#include "Level.hpp"
-#include "Player.hpp"
 
 // fwd decls
 namespace JamTemplate {
@@ -33,7 +33,7 @@ protected:
 private:
     std::shared_ptr<b2World> m_world { nullptr };
     std::shared_ptr<JamTemplate::SmartShape> m_overlay;
-    std::shared_ptr<Player> m_player;
+    JamTemplate::ObjectGroup<Player>::Sptr m_players;
     std::shared_ptr<Level> m_level;
 
     void doCreate() override;
@@ -42,6 +42,8 @@ private:
 
     virtual void doInternalUpdate(float const elapsed) override;
     virtual void doInternalDraw() const override;
+
+    void AddPlayer(int id);
 };
 
 #endif

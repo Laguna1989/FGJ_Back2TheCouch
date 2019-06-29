@@ -6,9 +6,10 @@
 #include "StateGame.hpp"
 #include <iostream>
 
-Player::Player(StateGame& sg, const b2BodyDef* def)
+Player::Player(StateGame& sg, const b2BodyDef* def, int id)
     : m_gameState(sg)
     , JamTemplate::Box2DObject { sg.getWorld(), def }
+    , m_id { id }
 {
     setB2Obj();
 }

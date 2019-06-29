@@ -45,15 +45,23 @@ void StateGame::doCreate()
 
 void StateGame::doCreateInternal()
 {
-
     m_level = std::make_shared<Level>(*this);
     m_level->LoadLevel("assets/level1.png");
     add(m_level);
+    m_players = std::make_shared<JamTemplate::ObjectGroup<Player>>();
+    add(m_players);
+    AddPlayer(0);
+    AddPlayer(1);
+}
 
+void StateGame::AddPlayer(int id)
+{
     b2BodyDef playerBodyDef;
     playerBodyDef.fixedRotation = true;
     playerBodyDef.allowSleep = false;
     playerBodyDef.type = b2_dynamicBody;
-    m_player = std::make_shared<Player>(*this, &playerBodyDef);
-    add(m_player);
+
+    auto player = std::make_shared<Player>(*this, &playerBodyDef, id);
+    add(player);
+    m_players->emplace_back(player);
 }

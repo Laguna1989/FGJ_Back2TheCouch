@@ -11,12 +11,13 @@ class StateGame;
 
 class Player : public JamTemplate::Box2DObject {
 public:
-    Player(StateGame& sg, const b2BodyDef* def);
+    Player(StateGame& sg, const b2BodyDef* def, int id);
 
     void setB2Obj();
 
 private:
     StateGame& m_gameState;
+    int m_id { 0 };
 
     JamTemplate::Animation::Sptr m_sprite;
 
@@ -27,7 +28,7 @@ private:
     virtual void doDraw() const;
     virtual void doCreate();
 
-	void updateMovement(float const elapsed);
+    void updateMovement(float const elapsed);
 };
 
 #endif

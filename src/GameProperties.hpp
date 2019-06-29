@@ -7,7 +7,6 @@
 class GP {
 public:
     GP() = delete;
-
     static float CellPositionSpacing() { return 32.0f; }
     static float CellPositionOffsetX() { return 10.0f; }
     static float CellPositionOffsetY() { return 10.0f; }
