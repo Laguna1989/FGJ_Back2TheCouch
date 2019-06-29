@@ -11,11 +11,10 @@ public:
 
     void AddScoreP1(int i = 1);
     void AddScoreP2(int i = 1);
-    void SetTime(float totalTime);
 
 private:
-    int m_scoreP1 { -1 };
-    int m_scoreP2 { -1 };
+    int m_scoreP1 { 0 };
+    int m_scoreP2 { 0 };
 
     JamTemplate::SmartText::Sptr m_scoreP1Text;
     JamTemplate::SmartText::Sptr m_scoreP2Text;

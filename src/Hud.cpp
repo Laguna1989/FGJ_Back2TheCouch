@@ -23,15 +23,11 @@ void Hud::AddScoreP2(int i)
 void Hud::doUpdate(float const elapsed)
 {
     using MH = JamTemplate::MathHelper;
-    /*
-    if (m_scoreP1 >= 0) {
-    m_scoreP1Text->setText("P1 Score: " + std::to_string(m_scoreP1));
-    }
-    if (m_scoreP2 >= 0) {
-    m_scoreP2Text->setText("P2 Score: " + std::to_string(m_scoreP2));
-    }
+
+    m_scoreP1Text->setText(std::to_string(m_scoreP1));
+    m_scoreP2Text->setText(std::to_string(m_scoreP2));
     m_scoreP1Text->update(elapsed);
-    m_scoreP2Text->update(elapsed);*/
+    m_scoreP2Text->update(elapsed);
     int secondsLeft = static_cast<int>(GP::TotalGameTime() - getAge());
     m_timerText->setText(std::to_string(MH::clamp(secondsLeft, 0, INT_MAX)));
     m_timerText->update(elapsed);
@@ -41,13 +37,10 @@ void Hud::doUpdate(float const elapsed)
 }
 
 void Hud::doDraw() const
-{ /*
-     if (m_scoreP1 >= 0) {
+{
     m_scoreP1Text->draw(getGame()->getRenderTarget());
-     }
-      if (m_scoreP2 >= 0) {
     m_scoreP2Text->draw(getGame()->getRenderTarget());
-     }*/
+
     m_timerText->draw(getGame()->getRenderTarget());
 }
 
@@ -57,17 +50,19 @@ void Hud::doCreate()
     m_scoreP1Text->loadFont("assets/font.ttf");
     m_scoreP1Text->setCharacterSize(16U);
     m_scoreP1Text->setColor(sf::Color { 248, 249, 254 });
+    m_scoreP1Text->setOutline(2, GP::Player1SecondaryColor());
     m_scoreP1Text->update(0.0f);
     m_scoreP1Text->SetTextAlign(JamTemplate::SmartText::TextAlign::LEFT);
-    m_scoreP1Text->setPosition({ 20, 20 });
+    m_scoreP1Text->setPosition({ 24.0f, 0 });
 
     m_scoreP2Text = std::make_shared<JamTemplate::SmartText>();
     m_scoreP2Text->loadFont("assets/font.ttf");
     m_scoreP2Text->setCharacterSize(16U);
     m_scoreP2Text->setColor(sf::Color { 248, 249, 254 });
+    m_scoreP2Text->setOutline(2, GP::Player2SecondaryColor());
     m_scoreP2Text->update(0.0f);
     m_scoreP2Text->SetTextAlign(JamTemplate::SmartText::TextAlign::LEFT);
-    m_scoreP2Text->setPosition({ 30, 30 });
+    m_scoreP2Text->setPosition({ getGame()->getRenderTarget()->getSize().x - 16.0f, 0 });
 
     m_timerText = std::make_shared<JamTemplate::SmartText>();
     m_timerText->loadFont("assets/font.ttf");
