@@ -18,9 +18,10 @@ public:
 
     JamTemplate::ObjectGroup<Tile>::Sptr getTiles() { return m_tiles; };
 
+    JamTemplate::SmartSprite::Sptr m_backgroundImage;
+
 private:
     StateGame& m_gameState;
-    JamTemplate::SmartSprite::Sptr m_backgroundImage;
 
     JamTemplate::ObjectGroup<Tile>::Sptr m_tiles;
     std::vector<sf::Vector2i> m_spawnPositions;

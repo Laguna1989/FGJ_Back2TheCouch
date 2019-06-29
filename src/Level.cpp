@@ -42,14 +42,18 @@ void Level::AddTile(int x, int y, TileType::TileType type)
 
 void Level::doCreate()
 {
+    m_backgroundImage = std::make_shared<JamTemplate::SmartSprite>();
+    m_backgroundImage->loadSprite("assets/background.png");
 }
 
 void Level::doUpdate(float const elapsed)
 {
     m_tiles->update(elapsed);
+    m_backgroundImage->update(elapsed);
 }
 void Level::doDraw() const
 {
+    //m_backgroundImage->draw(getGame()->getRenderTarget());
 }
 
 sf::Vector2f Level::getSpawnPosition(int id) const
