@@ -80,7 +80,7 @@ private:
 
         fixtureDef.shape = &dynamicBox;
         fixtureDef.density = 1.0f;
-        fixtureDef.friction = 0.09f;
+        fixtureDef.friction = 0.9f;
 
         getB2Body()->CreateFixture(&fixtureDef);
         getB2Body()->SetLinearDamping(0.1f);

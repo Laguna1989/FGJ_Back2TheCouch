@@ -1,6 +1,7 @@
 
 #include "Player.hpp"
 #include "JamTemplate/Game.hpp"
+#include "JamTemplate/InputManager.hpp"
 #include "JamTemplate/MathHelper.hpp"
 #include "StateGame.hpp"
 #include <iostream>
@@ -21,10 +22,10 @@ void Player::setB2Obj()
 
     fixtureDef.shape = &dynamicBox;
     fixtureDef.density = 1.0f;
-    fixtureDef.friction = 0.09f;
+    fixtureDef.friction = 0.9f;
 
     getB2Body()->CreateFixture(&fixtureDef);
-    getB2Body()->SetLinearDamping(0.1f);
+    getB2Body()->SetLinearDamping(0.9f);
 }
 
 void Player::doCreate()
@@ -42,8 +43,9 @@ void Player::doCreate()
 
 void Player::doUpdate(float const elapsed)
 {
-    m_sprite->setPosition(getPosition());
+    updateMovement(elapsed);
     m_sprite->update(elapsed);
+    m_sprite->setPosition(getPosition());
 
     m_closeCombatAttackArea->setPosition(getPosition());
     m_closeCombatAttackArea->update(elapsed);
@@ -55,4 +57,17 @@ void Player::doDraw() const
     if (m_drawCloseCombatAttackArea) {
         m_closeCombatAttackArea->draw(getGame()->getRenderTarget());
     }
+}
+
+void Player::updateMovement(float const elapsed)
+{
+    using im = JamTemplate::InputManager;
+    using k = sf::Keyboard::Key;
+    if (im::pressed(k::A) || im::pressed(k::Left)) {
+        getB2Body()->ApplyForceToCenter(b2Vec2 { -GP::PlayerMovementAcceleration(), 0 }, true);
+    }
+    if (im::pressed(k::D) || im::pressed(k::Right)) {
+        getB2Body()->ApplyForceToCenter(b2Vec2 { GP::PlayerMovementAcceleration(), 0 }, true);
+    }
+    std::cout << getB2Body()->GetLinearVelocity().x << std::endl;
 }

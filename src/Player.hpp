@@ -26,6 +26,8 @@ private:
     virtual void doUpdate(float const /*elapsed*/);
     virtual void doDraw() const;
     virtual void doCreate();
+
+	void updateMovement(float const elapsed);
 };
 
 #endif
