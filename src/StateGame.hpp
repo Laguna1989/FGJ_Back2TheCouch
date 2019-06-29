@@ -55,6 +55,7 @@ private:
 
     void AddPlayer(int id);
     void respawn(std::shared_ptr<Player>);
+    void score(int playerId, int score);
 };
 
 #endif
