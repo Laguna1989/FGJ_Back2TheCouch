@@ -26,6 +26,8 @@ private:
     JamTemplate::SmartShape::Sptr m_closeCombatAttackArea;
     bool m_drawCloseCombatAttackArea { false };
 
+    bool m_facingRight { true };
+
     virtual void doUpdate(float const /*elapsed*/);
     virtual void doDraw() const;
     virtual void doCreate();
