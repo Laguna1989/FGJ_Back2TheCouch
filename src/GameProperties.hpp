@@ -35,7 +35,8 @@ public:
     static float PlayerMovementAcceleration() { return 50000.0f; };
     static float PlayerFriction() { return 0.12f; };
     static float PlayerDensity() { return 1.0f; };
-    static float PlayerMaxSpeed() { return 50.0f; };
+    static float PlayerMaxSpeedHorizontal() { return 150.0f; };
+    static float PlayerMaxSpeedVertical() { return 200.0f; };
 
     static float TileFriction() { return 0.9f; };
     static float TileDensity() { return 1.0f; };

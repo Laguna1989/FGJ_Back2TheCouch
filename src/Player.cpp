@@ -77,7 +77,7 @@ void Player::doDraw() const
 
 void Player::updateMovement(float const elapsed)
 {
-
+    using MH = JamTemplate::MathHelper;
     if (m_input.isLeftPressed()) {
         getB2Body()->ApplyForceToCenter(b2Vec2 { -GP::PlayerMovementAcceleration(), 0 }, true);
     }
@@ -86,17 +86,17 @@ void Player::updateMovement(float const elapsed)
     }
 
     sf::Vector2f vel = JamTemplate::C::vec(getB2Body()->GetLinearVelocity());
-    float vl = JamTemplate::MathHelper::length(vel);
-    if (vl > 0.001)
-        std::cout << "vl = " << vl << std::endl;
 
-    float mv = GP::PlayerMaxSpeed();
-    if (std::fabs(vl) > mv) // cap at maximum speed
-    {
-        //getB2Body()->SetLinearVelocity(b2Vec2 { vel.x / vl * mv, vel.y / vl * mv });
-    } /* else if (std::fabs(vl) > 0.005f) // do exponential damping
+    float actualVelX = MH::clamp(vel.x, -GP::PlayerMaxSpeedHorizontal(), GP::PlayerMaxSpeedHorizontal());
+    float actualVelY = MH::clamp(vel.y, -GP::PlayerMaxSpeedVertical(), GP::PlayerMaxSpeedVertical());
+
+    getB2Body()->SetLinearVelocity(b2Vec2 { actualVelX, actualVelY });
+
+    float vl = JamTemplate::MathHelper::length(vel);
+
+    if (std::fabs(vl) > 0.005f) // do exponential damping
     {
         float d = 1.0f - GP::SpriteLinearDamping();
         getB2Body()->SetLinearVelocity(b2Vec2 { vel.x * d, vel.y * d });
-    }*/
+    }
 }
