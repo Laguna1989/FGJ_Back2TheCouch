@@ -2,6 +2,7 @@
 
 #include "GameProperties.hpp"
 #include "Hud.hpp"
+#include "JamTemplate/Collision.hpp"
 #include "JamTemplate/Game.hpp"
 #include "JamTemplate/SmartShape.hpp"
 #include "JamTemplate/SmartSprite.hpp"
@@ -11,6 +12,28 @@ void StateGame::doInternalUpdate(float const elapsed)
 {
     m_overlay->update(elapsed);
     m_world->Step(elapsed, GP::PhysicVelocityIterations(), GP::PhysicPositionIterations());
+
+    for (auto s : *m_shots) {
+        auto shot = s.lock();
+        if (shot == nullptr) {
+            continue;
+        }
+        if (!shot->isAlive() || shot->getAge() < 0.3 || shot->m_collided) {
+            continue;
+        }
+        for (auto t : *m_level->getTiles()) {
+            auto tile = t.lock();
+            if (tile == nullptr) {
+                continue;
+            }
+
+            if (JamTemplate::Collision::BoundingBoxTest(tile->getSprite(), shot->getSprite())) {
+                //shot->kill();
+                shot->Collide();
+                break;
+            }
+        }
+    }
 }
 
 void StateGame::doInternalDraw() const
@@ -52,6 +75,7 @@ void StateGame::doCreateInternal()
     add(m_players);
     AddPlayer(0);
     AddPlayer(1);
+    m_shots = std::make_shared<JamTemplate::ObjectGroup<Shot>>();
 }
 
 void StateGame::AddPlayer(int id)

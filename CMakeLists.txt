@@ -17,6 +17,8 @@ set (GAMEFILES
 	src/Player.hpp
 	src/PlayerInput.hpp
 	src/StateGame.hpp
+	src/Shot.cpp
+	src/Shot.hpp
 	src/StateGame.cpp
 	src/StateMenu.hpp
 	src/StateMenu.cpp

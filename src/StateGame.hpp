@@ -5,6 +5,7 @@
 #include "JamTemplate/ObjectGroup.hpp"
 #include "Level.hpp"
 #include "Player.hpp"
+#include "Shot.hpp"
 #include <Box2D/Box2D.h>
 #include <iostream>
 #include <memory>
@@ -27,6 +28,12 @@ public:
         return m_world;
     };
 
+    void SpawnShot(std::shared_ptr<Shot> shot)
+    {
+        add(shot);
+        m_shots->emplace_back(shot);
+    }
+
 protected:
     std::shared_ptr<Hud> m_hud;
 
@@ -34,6 +41,7 @@ private:
     std::shared_ptr<b2World> m_world { nullptr };
     std::shared_ptr<JamTemplate::SmartShape> m_overlay;
     JamTemplate::ObjectGroup<Player>::Sptr m_players;
+    JamTemplate::ObjectGroup<Shot>::Sptr m_shots;
     std::shared_ptr<Level> m_level;
 
     void doCreate() override;

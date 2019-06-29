@@ -8,6 +8,7 @@
 Level::Level(StateGame& sg)
     : m_gameState(sg)
 {
+    m_tiles = std::make_shared<JamTemplate::ObjectGroup<Tile>>();
 }
 
 void Level::LoadLevel(std::string const& fileName)
@@ -35,7 +36,7 @@ void Level::AddTile(int x, int y, TileType::TileType type)
     wallBodyDef.allowSleep = false;
 
     std::shared_ptr<Tile> t = std::make_shared<Tile>(x, y, TileType::TileType::Platform, &wallBodyDef, m_gameState.getWorld());
-    m_tiles.emplace_back(t);
+    m_tiles->emplace_back(t);
     m_gameState.add(t);
 }
 
@@ -45,7 +46,7 @@ void Level::doCreate()
 
 void Level::doUpdate(float const elapsed)
 {
-    m_tiles.update(elapsed);
+    m_tiles->update(elapsed);
 }
 void Level::doDraw() const
 {

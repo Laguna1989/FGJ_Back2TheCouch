@@ -28,12 +28,17 @@ private:
 
     bool m_facingRight { true };
 
+    float m_shotTimer { 0.0f };
+
     virtual void doUpdate(float const /*elapsed*/);
     virtual void doDraw() const;
     virtual void doCreate();
 
     void updateMovement(float const elapsed);
     void updateAnimation();
+
+    void updateShot(float const elapsed);
+    void SpawnShot();
 };
 
 #endif

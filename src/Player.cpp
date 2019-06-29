@@ -3,6 +3,7 @@
 #include "JamTemplate/Game.hpp"
 #include "JamTemplate/InputManager.hpp"
 #include "JamTemplate/MathHelper.hpp"
+#include "Shot.hpp"
 #include "StateGame.hpp"
 #include <iostream>
 
@@ -49,6 +50,7 @@ void Player::doCreate()
 
 void Player::doUpdate(float const elapsed)
 {
+    updateShot(elapsed);
     updateMovement(elapsed);
 
     updateAnimation();
@@ -58,6 +60,18 @@ void Player::doUpdate(float const elapsed)
     m_closeCombatAttackArea->setPosition(getPosition());
     m_closeCombatAttackArea->update(elapsed);
 }
+
+void Player::updateShot(float const elapsed)
+{
+    m_shotTimer -= elapsed;
+    if (m_shotTimer > 0) {
+        return;
+    }
+    if (m_input.hasJustPressedShot()) {
+        SpawnShot();
+    }
+}
+
 void Player::updateAnimation()
 {
     auto vel = JamTemplate::C::vec(getB2Body()->GetLinearVelocity());
@@ -119,4 +133,22 @@ void Player::updateMovement(float const elapsed)
         float d = 1.0f - GP::SpriteLinearDamping();
         getB2Body()->SetLinearVelocity(b2Vec2 { vel.x * d, vel.y * d });
     }
+}
+
+void Player::SpawnShot()
+{
+    m_shotTimer = GP::ShotTimer();
+    sf::Vector2f ofs { 0, 0 };
+    sf::Vector2f vel { GP::ShotVelocity(), 0 };
+    if (m_facingRight) {
+        ofs.x += GP::SpriteSize();
+    } else {
+        ofs.x -= GP::SpriteSize();
+        vel.x *= -1;
+    }
+    std::shared_ptr<Shot> shot = std::make_shared<Shot>(m_gameState);
+    shot->setPosition(getPosition() + ofs);
+    shot->setVelocity(vel);
+
+    m_gameState.SpawnShot(shot);
 }

@@ -25,6 +25,10 @@ public:
     {
         return im::justPressed(m_jumpKey);
     }
+    bool hasJustPressedShot()
+    {
+        return im::justPressed(m_shotKey);
+    }
 
 private:
     int m_id { 0 };
@@ -35,16 +39,19 @@ private:
             m_leftKey = sf::Keyboard::Key::Left;
             m_rightKey = sf::Keyboard::Key::Right;
             m_jumpKey = sf::Keyboard::Key::Up;
+            m_shotKey = sf::Keyboard::Key::RShift;
         } else if (m_id == 1) {
             m_leftKey = sf::Keyboard::Key::A;
             m_rightKey = sf::Keyboard::Key::D;
             m_jumpKey = sf::Keyboard::Key::W;
+            m_shotKey = sf::Keyboard::Key::LShift;
         }
     }
 
     sf::Keyboard::Key m_rightKey;
     sf::Keyboard::Key m_leftKey;
     sf::Keyboard::Key m_jumpKey;
+    sf::Keyboard::Key m_shotKey;
 };
 
 #endif

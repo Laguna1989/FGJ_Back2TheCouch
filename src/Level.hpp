@@ -16,11 +16,13 @@ public:
 
     sf::Vector2f getSpawnPosition(int id) const;
 
+    JamTemplate::ObjectGroup<Tile>::Sptr getTiles() { return m_tiles; };
+
 private:
     StateGame& m_gameState;
     JamTemplate::SmartSprite::Sptr m_backgroundImage;
 
-    JamTemplate::ObjectGroup<Tile> m_tiles;
+    JamTemplate::ObjectGroup<Tile>::Sptr m_tiles;
     std::vector<sf::Vector2i> m_spawnPositions;
 
     void AddTile(int x, int y, TileType::TileType type);

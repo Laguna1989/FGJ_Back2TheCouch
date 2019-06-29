@@ -42,6 +42,9 @@ public:
 
     static float TileFriction() { return 0.48f; };
     static float TileDensity() { return 1.0f; };
+
+    static float ShotVelocity() { return 200; };
+    static float ShotTimer() { return 0.25; };
 };
 
 #endif

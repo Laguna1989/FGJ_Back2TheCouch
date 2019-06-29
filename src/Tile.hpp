@@ -35,6 +35,8 @@ public:
 
     TileType::TileType Type() { return m_type; }
 
+    JamTemplate::SmartSprite::Sptr getSprite() { return m_sprite; };
+
 private:
     void updatePosition()
     {
