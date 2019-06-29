@@ -31,6 +31,7 @@ private:
     virtual void doCreate();
 
     void updateMovement(float const elapsed);
+    void updateAnimation();
 };
 
 #endif

@@ -14,15 +14,15 @@ void Level::LoadLevel(std::string const& fileName)
 {
     auto levelImage = JamTemplate::TextureManager::get(fileName).copyToImage();
 
-    for (int x = 0; x != levelImage.getSize().x; ++x) {
-        for (int y = 0; y != levelImage.getSize().y; ++y) {
+    for (unsigned int x = 0; x != levelImage.getSize().x; ++x) {
+        for (unsigned int y = 0; y != levelImage.getSize().y; ++y) {
             sf::Color c = levelImage.getPixel(x, y);
 
             if (c == sf::Color::White) {
                 AddTile(x, y, TileType::TileType::Platform);
             }
             if (c.r == 1 && c.g == 255 && c.b == 0) {
-                m_spawnPositions.emplace_back(sf::Vector2i { x, y });
+                m_spawnPositions.emplace_back(sf::Vector2i { static_cast<int>(x), static_cast<int>(y) });
             }
         }
     }

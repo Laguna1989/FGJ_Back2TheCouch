@@ -33,9 +33,10 @@ void Player::setB2Obj()
 void Player::doCreate()
 {
     m_sprite = std::make_shared<JamTemplate::Animation>();
-    m_sprite->add("assets/tile.png", "idle", sf::Vector2u { GP::SpriteSize(), GP::SpriteSize() }, JamTemplate::MathHelper::vectorBetween(0U, 1U), 0.15f);
+    m_sprite->add("assets/player.png", "idle", sf::Vector2u { GP::SpriteSize(), GP::SpriteSize() }, JamTemplate::MathHelper::vectorBetween(0U, 1U), 0.15f);
+    m_sprite->add("assets/player.png", "walk", sf::Vector2u { GP::SpriteSize(), GP::SpriteSize() }, JamTemplate::MathHelper::vectorBetween(0U, 6U), 0.15f);
     m_sprite->play("idle");
-    m_sprite->setColor(sf::Color { 0, 200, 140 });
+    //m_sprite->setColor(sf::Color { 0, 200, 140 });
 
     m_closeCombatAttackArea
         = std::make_shared<JamTemplate::SmartShape>();
@@ -47,12 +48,24 @@ void Player::doCreate()
 void Player::doUpdate(float const elapsed)
 {
     updateMovement(elapsed);
+
+    updateAnimation();
     m_sprite->update(elapsed);
     m_sprite->setPosition(getPosition());
 
     m_closeCombatAttackArea->setPosition(getPosition());
     m_closeCombatAttackArea->update(elapsed);
 }
+void Player::updateAnimation()
+{
+    auto vel = JamTemplate::C::vec(getB2Body()->GetLinearVelocity());
+    if (fabs(vel.x) > 10) {
+        m_sprite->play("walk");
+    } else {
+        m_sprite->play("idle");
+    }
+}
+
 void Player::doDraw() const
 {
     m_sprite->draw(getGame()->getRenderTarget());
