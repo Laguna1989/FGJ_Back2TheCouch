@@ -15,7 +15,6 @@ void StateGame::doInternalUpdate(float const elapsed)
 
 void StateGame::doInternalDraw() const
 {
-    m_background->draw(getGame()->getRenderTarget());
     drawObjects();
     m_overlay->draw(getGame()->getRenderTarget());
 }
@@ -32,11 +31,6 @@ void StateGame::doCreate()
     using JamTemplate::SmartShape;
     using JamTemplate::TweenAlpha;
 
-    m_background = std::make_shared<SmartShape>();
-    m_background->makeRect({ w, h });
-    m_background->setColor(GP::PaletteBackground());
-    m_background->update(0.0f);
-
     m_overlay = std::make_shared<SmartShape>();
     m_overlay->makeRect(sf::Vector2f { w, h });
     m_overlay->setColor(sf::Color { 0, 0, 0 });
@@ -51,6 +45,11 @@ void StateGame::doCreate()
 
 void StateGame::doCreateInternal()
 {
+
+    m_level = std::make_shared<Level>(*this);
+    m_level->LoadLevel("assets/level1.png");
+    add(m_level);
+
     b2BodyDef playerBodyDef;
     playerBodyDef.fixedRotation = true;
     playerBodyDef.allowSleep = false;

@@ -32,7 +32,6 @@ protected:
 
 private:
     std::shared_ptr<b2World> m_world { nullptr };
-    std::shared_ptr<JamTemplate::SmartShape> m_background;
     std::shared_ptr<JamTemplate::SmartShape> m_overlay;
     std::shared_ptr<Player> m_player;
     std::shared_ptr<Level> m_level;

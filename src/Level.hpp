@@ -2,8 +2,9 @@
 #define LEVEL_HPP_INCLUDEGUARD
 
 #include "JamTemplate/GameObject.hpp"
+#include "JamTemplate/ObjectGroup.hpp"
 #include "JamTemplate/SmartSprite.hpp"
-
+#include "Tile.hpp"
 // forward declaration
 class StateGame;
 
@@ -17,7 +18,11 @@ private:
     StateGame& m_gameState;
     JamTemplate::SmartSprite::Sptr m_backgroundImage;
 
-    virtual void doUpdate(float const /*elapsed*/);
+    JamTemplate::ObjectGroup<Tile> m_tiles;
+    void AddTile(int x, int y, TileType::TileType type);
+
+    virtual void
+    doUpdate(float const /*elapsed*/);
     virtual void doDraw() const;
     virtual void doCreate();
 };

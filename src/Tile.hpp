@@ -20,7 +20,7 @@ enum TileType {
 class Tile : public JamTemplate::Box2DObject {
 
 public:
-    Tile(int x, int y, const b2BodyDef* def, std::shared_ptr<b2World> world)
+    Tile(int x, int y, TileType::TileType ty, const b2BodyDef* def, std::shared_ptr<b2World> world)
         : JamTemplate::Box2DObject { world, def }
         , m_x(x)
         , m_y(y)
@@ -31,7 +31,7 @@ public:
     int X() { return m_x; }
     int Y() { return m_y; }
 
-    virtual void SetTexture() { m_sprite->loadSprite("assets/undefined.png"); }
+    virtual void SetTexture() { m_sprite->loadSprite("assets/tile.png"); }
 
     TileType::TileType Type() { return m_type; }
 
@@ -47,6 +47,7 @@ private:
         m_sprite = std::make_shared<JamTemplate::SmartSprite>();
 
         SetTexture();
+        setB2Obj();
 
         updatePosition();
     }
@@ -68,6 +69,22 @@ protected:
     TileType::TileType m_type;
 
     JamTemplate::SmartSprite::Sptr m_sprite;
+
+private:
+    void setB2Obj()
+    {
+        b2PolygonShape dynamicBox;
+        dynamicBox.SetAsBox(GP::TileSpriteSize() / 2, GP::TileSpriteSize() / 2);
+
+        b2FixtureDef fixtureDef;
+
+        fixtureDef.shape = &dynamicBox;
+        fixtureDef.density = 1.0f;
+        fixtureDef.friction = 0.09f;
+
+        getB2Body()->CreateFixture(&fixtureDef);
+        getB2Body()->SetLinearDamping(0.1f);
+    }
 };
 
 #endif
