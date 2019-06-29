@@ -65,7 +65,7 @@ public:
     static float LavaRiseSpeed() { return 5.0f; };
     static float LavaStartTime() { return 2.0f; };
     static float LavaStopTime() { return 25.0f; };
-    static float TotalGameTime() { return 50.0f; };
+    static float TotalGameTime() { return 90.0f; };
 
     static int PointsForHit() { return 1; };
     static int PointsForOtherPlayerDyingInAFire() { return 4; };

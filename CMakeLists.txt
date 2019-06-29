@@ -124,6 +124,15 @@ target_include_directories(${PROJECTNAME} PRIVATE /usr/local/Cellar/sfml/2.4.2_1
 target_link_libraries(${PROJECTNAME} optimized sfml-window )
 target_link_libraries(${PROJECTNAME} optimized sfml-system )
 target_link_libraries(${PROJECTNAME} optimized sfml-graphics )
+target_link_libraries(${PROJECTNAME} optimized sfml-audio )
+
+if (WIN32)
+	target_link_libraries(${PROJECTNAME} debug sfml-system-d )
+	target_link_libraries(${PROJECTNAME} debug sfml-window-d )
+	target_link_libraries(${PROJECTNAME} debug sfml-graphics-d )
+	target_link_libraries(${PROJECTNAME} debug sfml-audio-d )
+endif (WIN32)
+
 target_link_libraries(${PROJECTNAME} JamTemplate)
 target_link_libraries(${PROJECTNAME} Box2D)
 
@@ -135,10 +144,12 @@ if (WIN32)
     configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1_win/bin/sfml-system-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
     configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1_win/bin/sfml-window-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
     configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1_win/bin/sfml-graphics-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
+	configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1_win/bin/sfml-audio-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
 	
 	configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1_win/bin/sfml-system-d-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
     configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1_win/bin/sfml-window-d-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
     configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1_win/bin/sfml-graphics-d-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
+	configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1_win/bin/sfml-audio-d-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
 endif (WIN32)
 configure_file(${CMAKE_SOURCE_DIR}/.clang-format ${CMAKE_BINARY_DIR}/ COPYONLY)
 
