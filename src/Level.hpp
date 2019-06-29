@@ -15,6 +15,7 @@ public:
     void LoadLevel(std::string const& fileName);
 
     sf::Vector2f getSpawnPosition(int id) const;
+    sf::Vector2f getSpawnPositionAbove(float minHeight) const;
 
     JamTemplate::ObjectGroup<Tile>::Sptr getTiles() { return m_tiles; };
 

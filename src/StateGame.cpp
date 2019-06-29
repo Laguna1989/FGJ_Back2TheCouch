@@ -44,6 +44,17 @@ void StateGame::doInternalUpdate(float const elapsed)
             }
         }
     }
+
+    for (auto p : *m_players) {
+        auto player = p.lock();
+        if (player == nullptr) {
+            continue;
+        }
+
+        if (JamTemplate::Collision::BoundingBoxTest(player->getSprite(), m_lava->getSprite())) {
+            respawn(player);
+        }
+    }
 }
 
 void StateGame::doInternalDraw() const
@@ -104,4 +115,12 @@ void StateGame::AddPlayer(int id)
     player->setPosition(m_level->getSpawnPosition(id));
     add(player);
     m_players->emplace_back(player);
+}
+
+void StateGame::respawn(std::shared_ptr<Player> player)
+{
+    // TODO: modify scores to reflect player's failure
+    // TODO: wait for a while
+    auto pos = m_level->getSpawnPositionAbove(m_lava->getHeight());
+    player->setPosition(pos);
 }

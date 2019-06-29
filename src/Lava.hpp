@@ -15,6 +15,9 @@ class Lava : public JamTemplate::GameObject {
 public:
     Lava(StateGame& sg, int id);
 
+    float getHeight() const;
+    JamTemplate::SmartShape::Sptr getSprite() { return m_lavaShape; };
+
 private:
     StateGame& m_gameState;
     int m_id { 0 };
