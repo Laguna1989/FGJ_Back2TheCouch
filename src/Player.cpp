@@ -33,10 +33,9 @@ void Player::setB2Obj()
 void Player::doCreate()
 {
     m_sprite = std::make_shared<JamTemplate::Animation>();
-    m_sprite->add("assets/player.png", "idle", sf::Vector2u { GP::SpriteSize(), GP::SpriteSize() }, JamTemplate::MathHelper::vectorBetween(0U, 1U), 0.15f);
-    m_sprite->add("assets/player.png", "walk", sf::Vector2u { GP::SpriteSize(), GP::SpriteSize() }, JamTemplate::MathHelper::vectorBetween(0U, 6U), 0.15f);
+    m_sprite->add("assets/player.png", "idle", sf::Vector2u { GP::SpriteSize(), GP::SpriteSize() }, JamTemplate::MathHelper::vectorBetween(0U, 0U), 0.15f);
+    m_sprite->add("assets/player.png", "walk", sf::Vector2u { GP::SpriteSize(), GP::SpriteSize() }, JamTemplate::MathHelper::vectorBetween(0U, 3U), 0.1f);
     m_sprite->play("idle");
-    //m_sprite->setColor(sf::Color { 0, 200, 140 });
 
     m_closeCombatAttackArea
         = std::make_shared<JamTemplate::SmartShape>();
@@ -61,8 +60,17 @@ void Player::updateAnimation()
     auto vel = JamTemplate::C::vec(getB2Body()->GetLinearVelocity());
     if (fabs(vel.x) > 10) {
         m_sprite->play("walk");
+        m_facingRight = (vel.x > 0);
     } else {
         m_sprite->play("idle");
+    }
+
+    if (m_facingRight) {
+        m_sprite->setScale(sf::Vector2f { 1, 1 });
+        m_sprite->setOffset(sf::Vector2f { 0.0f, 0.0f });
+    } else {
+        m_sprite->setScale(sf::Vector2f { -1, 1 });
+        m_sprite->setOffset(sf::Vector2f { static_cast<float>(GP::SpriteSize()), 0.0f });
     }
 }
 
