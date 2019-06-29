@@ -38,7 +38,7 @@ public:
 private:
     void updatePosition()
     {
-        setPosition(sf::Vector2f(static_cast<float>(m_x * GP::TileSpriteSize()), static_cast<float>(m_y * GP::TileSpriteSize())));
+        setPosition(sf::Vector2f(static_cast<float>(m_x * GP::SpriteSize()), static_cast<float>(m_y * GP::SpriteSize())));
         m_sprite->setPosition(getPosition());
     }
 
@@ -74,16 +74,16 @@ private:
     void setB2Obj()
     {
         b2PolygonShape dynamicBox;
-        dynamicBox.SetAsBox(GP::TileSpriteSize() / 2, GP::TileSpriteSize() / 2);
+        dynamicBox.SetAsBox(GP::SpriteSize() / 2, GP::SpriteSize() / 2);
 
         b2FixtureDef fixtureDef;
 
         fixtureDef.shape = &dynamicBox;
-        fixtureDef.density = 1.0f;
-        fixtureDef.friction = 0.9f;
+        fixtureDef.density = GP::TileDensity();
+        fixtureDef.friction = GP::TileFriction();
 
         getB2Body()->CreateFixture(&fixtureDef);
-        getB2Body()->SetLinearDamping(0.1f);
+        getB2Body()->SetLinearDamping(GP::SpriteLinearDamping());
     }
 };
 
