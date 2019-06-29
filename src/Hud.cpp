@@ -2,6 +2,7 @@
 
 #include "GameProperties.hpp"
 #include "JamTemplate/Game.hpp"
+#include "JamTemplate/MathHelper.hpp"
 
 Hud::Hud() = default;
 
@@ -20,7 +21,9 @@ void Hud::AddScoreP2(int i)
     }
 }
 void Hud::doUpdate(float const elapsed)
-{ /*
+{
+    using MH = JamTemplate::MathHelper;
+    /*
     if (m_scoreP1 >= 0) {
     m_scoreP1Text->setText("P1 Score: " + std::to_string(m_scoreP1));
     }
@@ -30,7 +33,7 @@ void Hud::doUpdate(float const elapsed)
     m_scoreP1Text->update(elapsed);
     m_scoreP2Text->update(elapsed);*/
     int secondsLeft = static_cast<int>(GP::TotalGameTime() - getAge());
-    m_timerText->setText(std::to_string(secondsLeft));
+    m_timerText->setText(std::to_string(MH::clamp(secondsLeft, 0, INT_MAX)));
     m_timerText->update(elapsed);
     float center = GP::PlayfieldWidth() / (2.0f * GP::PixelScalingFactor());
     auto textBoundingBox = m_timerText->getGlobalBounds();

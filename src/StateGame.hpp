@@ -54,6 +54,7 @@ private:
     virtual void doInternalDraw() const override;
 
     void AddPlayer(int id);
+    void respawn(std::shared_ptr<Player>);
 };
 
 #endif
