@@ -7,7 +7,7 @@
 int main()
 {
     JamTemplate::Game::Sptr game = std::make_shared<JamTemplate::Game>();
-    game->setUp(800, 600, 3, GP::GameName());
+    game->setUp(GP::PlayfieldWidth(), GP::PlayfieldHeight(), GP::PixelScalingFactor(), GP::GameName());
 
     auto window = game->getRenderWindow();
     auto renderTexture = game->getRenderTarget();

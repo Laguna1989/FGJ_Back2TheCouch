@@ -41,6 +41,8 @@ void StateGame::doInternalDraw() const
     m_level->m_backgroundImage->draw(getGame()->getRenderTarget());
     drawObjects();
     m_overlay->draw(getGame()->getRenderTarget());
+    m_lava->draw();
+    m_hud->draw();
 }
 
 void StateGame::doCreate()
@@ -77,6 +79,8 @@ void StateGame::doCreateInternal()
     AddPlayer(0);
     AddPlayer(1);
     m_shots = std::make_shared<JamTemplate::ObjectGroup<Shot>>();
+    m_lava = std::make_shared<Lava>(*this, 2143);
+    add(m_lava);
 }
 
 void StateGame::AddPlayer(int id)
