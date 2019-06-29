@@ -74,7 +74,7 @@ private:
     void setB2Obj()
     {
         b2PolygonShape dynamicBox;
-        dynamicBox.SetAsBox(GP::SpriteSize() / 2, GP::SpriteSize() / 2);
+        dynamicBox.SetAsBox(static_cast<float32>(GP::SpriteSize()) / 2.0f, static_cast<float32>(GP::SpriteSize()) / 2.0f);
 
         b2FixtureDef fixtureDef;
 
