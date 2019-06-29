@@ -33,7 +33,7 @@ void Hud::doUpdate(float const elapsed)
     m_timerText->update(elapsed);
     float center = GP::PlayfieldWidth() / (2.0f * GP::PixelScalingFactor());
     auto textBoundingBox = m_timerText->getGlobalBounds();
-    m_timerText->setPosition({ center - (textBoundingBox.width / 2.0f), 10 });
+    m_timerText->setPosition({ center /*- (textBoundingBox.width / 2.0f)*/, 10 });
 }
 
 void Hud::doDraw() const
