@@ -1,6 +1,7 @@
 #ifndef GAME_STATE_GAME_HPP_INCLUDEGUARD
 #define GAME_STATE_GAME_HPP_INCLUDEGUARD
 
+#include <Box2D/Box2D.h>
 #include <iostream>
 #include <memory>
 #include <vector>
@@ -17,12 +18,19 @@ class Hud;
 
 class StateGame : public JamTemplate::GameState {
 public:
-    StateGame() = default;
+    StateGame()
+        : m_world { std::make_shared<b2World>(b2Vec2 { 0, 0 }) } {};
+
+    std::shared_ptr<b2World> getWorld()
+    {
+        return m_world;
+    };
 
 protected:
     std::shared_ptr<Hud> m_hud;
 
 private:
+    std::shared_ptr<b2World> m_world { nullptr };
     std::shared_ptr<JamTemplate::SmartShape> m_background;
     std::shared_ptr<JamTemplate::SmartShape> m_overlay;
     std::shared_ptr<Player> m_player;

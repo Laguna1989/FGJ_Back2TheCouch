@@ -10,6 +10,7 @@
 void StateGame::doInternalUpdate(float const elapsed)
 {
     m_overlay->update(elapsed);
+    m_world->Step(elapsed, GP::velocityIterations(), GP::positionIterations());
 }
 
 void StateGame::doInternalDraw() const
@@ -21,6 +22,9 @@ void StateGame::doInternalDraw() const
 
 void StateGame::doCreate()
 {
+
+    m_world->SetGravity(b2Vec2 { 0, 1000 });
+
     float w = static_cast<float>(getGame()->getRenderTarget()->getSize().x);
     float h = static_cast<float>(getGame()->getRenderTarget()->getSize().y);
     m_hud = std::make_shared<Hud>();
@@ -47,6 +51,11 @@ void StateGame::doCreate()
 
 void StateGame::doCreateInternal()
 {
-    m_player = std::make_shared<Player>();
+
+    b2BodyDef playerBodyDef;
+    playerBodyDef.fixedRotation = true;
+    playerBodyDef.allowSleep = false;
+    playerBodyDef.type = b2_dynamicBody;
+    m_player = std::make_shared<Player>(*this, &playerBodyDef);
     add(m_player);
 }

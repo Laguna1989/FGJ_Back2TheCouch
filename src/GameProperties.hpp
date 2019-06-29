@@ -25,6 +25,9 @@ public:
     static sf::Color PaletteFlashRed() { return sf::Color { 143, 33, 33 }; };
 
     static std::string GameName() { return "Back 2 The Couch"; };
+
+    static std::int32_t velocityIterations() { return 2; };
+    static std::int32_t positionIterations() { return 2; };
 };
 
 #endif
