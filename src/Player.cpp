@@ -16,23 +16,23 @@ Player::Player(StateGame& sg, const b2BodyDef* def)
 void Player::setB2Obj()
 {
     b2PolygonShape dynamicBox;
-    dynamicBox.SetAsBox(8, 8);
+    dynamicBox.SetAsBox(GP::SpriteSize() / 2, GP::SpriteSize() / 2);
 
     b2FixtureDef fixtureDef;
 
     fixtureDef.shape = &dynamicBox;
-    fixtureDef.density = 1.0f;
-    fixtureDef.friction = 0.9f;
+    fixtureDef.density = GP::PlayerDensity();
+    fixtureDef.friction = GP::PlayerFriction();
 
     getB2Body()->CreateFixture(&fixtureDef);
-    getB2Body()->SetLinearDamping(0.09f);
+    getB2Body()->SetLinearDamping(GP::SpriteLinearDamping());
 }
 
 void Player::doCreate()
 {
     setPosition(sf::Vector2f { 20, 14 });
     m_sprite = std::make_shared<JamTemplate::Animation>();
-    m_sprite->add("assets/coin.png", "idle", sf::Vector2u { 16, 16 }, JamTemplate::MathHelper::vectorBetween(0U, 11U), 0.15f);
+    m_sprite->add("assets/coin.png", "idle", sf::Vector2u { GP::SpriteSize(), GP::SpriteSize() }, JamTemplate::MathHelper::vectorBetween(0U, 11U), 0.15f);
     m_sprite->play("idle");
 
     m_closeCombatAttackArea = std::make_shared<JamTemplate::SmartShape>();
@@ -69,5 +69,5 @@ void Player::updateMovement(float const elapsed)
     if (im::pressed(k::D) || im::pressed(k::Right)) {
         getB2Body()->ApplyForceToCenter(b2Vec2 { GP::PlayerMovementAcceleration(), 0 }, true);
     }
-    std::cout << getB2Body()->GetLinearVelocity().x << std::endl;
+    
 }
