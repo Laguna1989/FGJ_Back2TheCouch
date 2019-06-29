@@ -77,7 +77,6 @@ void Player::updateAnimation()
     auto vel = JamTemplate::C::vec(getB2Body()->GetLinearVelocity());
     if (fabs(vel.x) > 10) {
         m_sprite->play("walk");
-        m_facingRight = (vel.x > 0);
     } else {
         m_sprite->play("idle");
     }
@@ -105,9 +104,11 @@ void Player::updateMovement(float const elapsed)
     using MH = JamTemplate::MathHelper;
     if (m_input.isLeftPressed()) {
         getB2Body()->ApplyForceToCenter(b2Vec2 { -GP::PlayerMovementAcceleration(), 0 }, true);
+        m_facingRight = false;
     }
     if (m_input.isRightPressed()) {
         getB2Body()->ApplyForceToCenter(b2Vec2 { GP::PlayerMovementAcceleration(), 0 }, true);
+        m_facingRight = true;
     }
     if (m_input.hasJustPressedJump() && fabs(getB2Body()->GetLinearVelocity().y) < GP::PlayerVerticalSpeedJumpThreshold()) {
         getB2Body()->ApplyLinearImpulseToCenter(b2Vec2 { 0, -GP::PlayerJumpImpulse() }, true);
@@ -140,12 +141,16 @@ void Player::SpawnShot()
     m_shotTimer = GP::ShotTimer();
     sf::Vector2f ofs { 0, -4 };
     sf::Vector2f vel { GP::ShotVelocity(), JamTemplate::Random::getFloat(-10, 10) };
+    b2Vec2 recoilImpulse;
     if (m_facingRight) {
         ofs.x += GP::SpriteSize();
+        recoilImpulse = b2Vec2 { -GP::ShotRecoilHorizontal(), -GP::ShotRecoilVertical() };
     } else {
         ofs.x -= GP::SpriteSize();
         vel.x *= -1;
+        recoilImpulse = b2Vec2 { GP::ShotRecoilHorizontal(), -GP::ShotRecoilVertical() };
     }
+    getB2Body()->ApplyLinearImpulseToCenter(recoilImpulse, true);
     std::shared_ptr<Shot> shot = std::make_shared<Shot>(m_gameState);
     shot->setPosition(getPosition() + ofs);
     shot->setVelocity(vel);
@@ -156,4 +161,11 @@ void Player::SpawnShot()
 void Player::getHitByShot(std::shared_ptr<Shot> shot)
 {
     m_sprite->flash(0.125);
+    b2Vec2 knockbackImpulse;
+    if (shot->getVelocity().x < 0.0f) {
+        knockbackImpulse = b2Vec2 { -GP::ShotKnockbackHorizontal(), -GP::ShotKnockbackVertical() };
+    } else {
+        knockbackImpulse = b2Vec2 { GP::ShotKnockbackHorizontal(), -GP::ShotKnockbackVertical() };
+    }
+    getB2Body()->ApplyLinearImpulseToCenter(knockbackImpulse, true);
 }

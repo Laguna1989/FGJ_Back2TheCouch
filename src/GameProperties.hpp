@@ -50,6 +50,10 @@ public:
     static float ShotVelocity() { return 250; };
     static float ShotTimer() { return 0.25; };
     static float ShotInvincibleTime() { return 0.1f; };
+    static float ShotKnockbackHorizontal() { return 45000.0f; };
+    static float ShotKnockbackVertical() { return 25000.0f; };
+    static float ShotRecoilHorizontal() { return 8000.0f; };
+    static float ShotRecoilVertical() { return 10000.0f; };
 
     static float LavaRiseSpeed() { return 5.0f; };
     static float LavaStartTime() { return 2.0f; };
