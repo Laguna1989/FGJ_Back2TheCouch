@@ -35,6 +35,9 @@ void Lava::doDraw() const
 
 float Lava::getHeight() const
 {
+    if (getAge() > GP::LavaStopTime()) {
+        return getGame()->getRenderTarget()->getSize().y - GP::LavaRiseSpeed() * GP::LavaStopTime();
+    }
     float h = static_cast<float>(getGame()->getRenderTarget()->getSize().y);
     return (h - (getAge() * GP::LavaRiseSpeed()) + (GP::LavaStartTime() * GP::LavaRiseSpeed()));
 }

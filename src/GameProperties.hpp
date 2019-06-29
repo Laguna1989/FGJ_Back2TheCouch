@@ -47,14 +47,13 @@ public:
     static float TileFriction() { return 0.48f; };
     static float TileDensity() { return 1.0f; };
 
-
     static float ShotVelocity() { return 250; };
     static float ShotTimer() { return 0.25; };
     static float ShotInvincibleTime() { return 0.1f; };
 
     static float LavaRiseSpeed() { return 5.0f; };
     static float LavaStartTime() { return 2.0f; };
-    static float LavaStopTime() { return 27.0f; };
+    static float LavaStopTime() { return 25.0f; };
     static float TotalGameTime() { return 50.0f; };
 };
 

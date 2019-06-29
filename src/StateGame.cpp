@@ -43,6 +43,7 @@ void StateGame::doInternalUpdate(float const elapsed)
 
         if (JamTemplate::Collision::BoundingBoxTest(player->getSprite(), m_lava->getSprite())) {
             respawn(player);
+            player->update(0.0f);
         }
     }
 }

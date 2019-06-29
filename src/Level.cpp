@@ -2,6 +2,7 @@
 #include "Level.hpp"
 #include "JamTemplate/Game.hpp"
 #include "JamTemplate/MathHelper.hpp"
+#include "JamTemplate/Random.hpp"
 #include "StateGame.hpp"
 #include <iostream>
 
@@ -71,5 +72,12 @@ sf::Vector2f Level::getSpawnPositionAbove(float minHeight) const
         return v.y < ((minHeight / GP::SpriteSize()) - 1);
     });
     std::sort(vec.begin(), vec.end(), [](auto const& a, auto const& b) -> bool { return a.y > b.y; });
-    return sf::Vector2f { static_cast<float>(GP::SpriteSize() * vec.at(0).x), static_cast<float>(GP::SpriteSize() * vec.at(0).y) };
+    // If there are multiple lowest spawn points at the same height, pick one at random.
+    auto targetHeight = vec.at(0).y;
+    std::vector<sf::Vector2i> allLowest;
+    std::copy_if(vec.begin(), vec.end(), std::back_inserter(allLowest), [targetHeight](auto const& v) {
+        return v.y == targetHeight;
+    });
+    int chosenIndex = JamTemplate::Random::getInt(0, allLowest.size() - 1);
+    return sf::Vector2f { static_cast<float>(GP::SpriteSize() * allLowest.at(chosenIndex).x), static_cast<float>(GP::SpriteSize() * allLowest.at(chosenIndex).y) };
 }
