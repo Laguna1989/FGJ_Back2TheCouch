@@ -12,9 +12,16 @@ Level::Level(StateGame& sg)
 
 void Level::LoadLevel(std::string const& fileName)
 {
+    auto levelImage = JamTemplate::TextureManager::get(fileName).copyToImage();
 
-    for (int i = 0; i != 10; ++i) {
-        AddTile(i, 5, TileType::TileType::Platform);
+    for (int x = 0; x != levelImage.getSize().x; ++x) {
+        for (int y = 0; y != levelImage.getSize().y; ++y) {
+            sf::Color c = levelImage.getPixel(x, y);
+
+            if (c == sf::Color::White) {
+                AddTile(x, y, TileType::TileType::Platform);
+            }
+        }
     }
 }
 

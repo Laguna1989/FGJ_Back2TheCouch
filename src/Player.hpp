@@ -20,8 +20,8 @@ private:
 
     JamTemplate::Animation::Sptr m_sprite;
 
-    JamTemplate::SmartShape::Sptr m_collider;
-    bool m_drawCollider { true };
+    JamTemplate::SmartShape::Sptr m_closeCombatAttackArea;
+    bool m_drawCloseCombatAttackArea { false };
 
     virtual void doUpdate(float const /*elapsed*/);
     virtual void doDraw() const;

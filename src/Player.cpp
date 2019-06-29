@@ -29,30 +29,30 @@ void Player::setB2Obj()
 
 void Player::doCreate()
 {
+    setPosition(sf::Vector2f { 20, 0 });
     m_sprite = std::make_shared<JamTemplate::Animation>();
     m_sprite->add("assets/coin.png", "idle", sf::Vector2u { 16, 16 }, JamTemplate::MathHelper::vectorBetween(0U, 11U), 0.15f);
     m_sprite->play("idle");
 
-    m_collider = std::make_shared<JamTemplate::SmartShape>();
-    m_collider->makeRect(sf::Vector2f { 24, 20 });
-    m_collider->setOffset(sf::Vector2f { 8, 6 });
-    m_collider->setOrigin(sf::Vector2f { 8, 10 });
+    m_closeCombatAttackArea = std::make_shared<JamTemplate::SmartShape>();
+    m_closeCombatAttackArea->makeRect(sf::Vector2f { 24, 20 });
+    m_closeCombatAttackArea->setOffset(sf::Vector2f { 8, 6 });
+    m_closeCombatAttackArea->setOrigin(sf::Vector2f { 8, 10 });
 }
 
 void Player::doUpdate(float const elapsed)
 {
-    //std::cout << "I am alive" << std::endl;
     m_sprite->setPosition(getPosition());
     m_sprite->update(elapsed);
 
-    m_collider->setPosition(getPosition());
-    m_collider->update(elapsed);
+    m_closeCombatAttackArea->setPosition(getPosition());
+    m_closeCombatAttackArea->update(elapsed);
 }
 void Player::doDraw() const
 {
     m_sprite->draw(getGame()->getRenderTarget());
 
-    if (m_drawCollider) {
-        m_collider->draw(getGame()->getRenderTarget());
+    if (m_drawCloseCombatAttackArea) {
+        m_closeCombatAttackArea->draw(getGame()->getRenderTarget());
     }
 }
