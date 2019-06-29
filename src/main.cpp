@@ -1,8 +1,8 @@
-#include "JamTemplate/Game.hpp"
-#include <SFML/Graphics.hpp>
-
 #include "GameProperties.hpp"
+#include "JamTemplate/Game.hpp"
+#include "JamTemplate/TextureManager.hpp"
 #include "StateMenu.hpp"
+#include <SFML/Graphics.hpp>
 
 int main()
 {
@@ -15,6 +15,9 @@ int main()
 
     game->switchState(std::make_shared<StateMenu>());
     sf::Clock clock;
+
+    JamTemplate::TextureManager::addselectiveColorReplacement(0, { std::make_pair(sf::Color { 23, 255, 0 }, sf::Color { 0, 0, 255 }) });
+    JamTemplate::TextureManager::addselectiveColorReplacement(1, { std::make_pair(sf::Color { 23, 255, 0 }, sf::Color { 255, 0, 0 }) });
 
     while (window->isOpen()) {
         sf::Time elapsed = clock.restart();
