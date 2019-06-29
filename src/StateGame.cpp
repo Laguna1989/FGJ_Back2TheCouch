@@ -18,7 +18,7 @@ void StateGame::doInternalUpdate(float const elapsed)
         if (shot == nullptr) {
             continue;
         }
-        if (!shot->isAlive() || shot->getAge() < 0.3 || shot->m_collided) {
+        if (!shot->isAlive() || !shot->m_movementStarted || shot->m_collided) {
             continue;
         }
         for (auto t : *m_level->getTiles()) {

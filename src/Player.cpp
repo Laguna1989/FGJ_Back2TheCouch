@@ -138,8 +138,8 @@ void Player::updateMovement(float const elapsed)
 void Player::SpawnShot()
 {
     m_shotTimer = GP::ShotTimer();
-    sf::Vector2f ofs { 0, 0 };
-    sf::Vector2f vel { GP::ShotVelocity(), 0 };
+    sf::Vector2f ofs { 0, -4 };
+    sf::Vector2f vel { GP::ShotVelocity(), JamTemplate::Random::getFloat(-10, 10) };
     if (m_facingRight) {
         ofs.x += GP::SpriteSize();
     } else {
