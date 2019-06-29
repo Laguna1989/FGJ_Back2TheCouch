@@ -30,15 +30,17 @@ public:
     static float PhysicsGravity() { return 500.0f; };
 
     static unsigned int SpriteSize() { return 12; };
-    static float SpriteLinearDamping() { return 0.1f; };
+    static float SpriteLinearDamping() { return 0.075f; };
 
-    static float PlayerMovementAcceleration() { return 50000.0f; };
-    static float PlayerFriction() { return 0.12f; };
+    static float PlayerMovementAcceleration() { return 60000.0f; };
+    static float PlayerFriction() { return 0.01f; };
     static float PlayerDensity() { return 1.0f; };
-    static float PlayerMaxSpeedHorizontal() { return 150.0f; };
-    static float PlayerMaxSpeedVertical() { return 200.0f; };
+    static float PlayerMaxSpeedHorizontal() { return 125.0f; };
+    static float PlayerMaxSpeedVertical() { return 250.0f; };
+    static float PlayerJumpImpulse() { return 50000.0f; };
+    static float PlayerVerticalSpeedJumpThreshold() { return 1e-5f; };
 
-    static float TileFriction() { return 0.9f; };
+    static float TileFriction() { return 0.16f; };
     static float TileDensity() { return 1.0f; };
 };
 

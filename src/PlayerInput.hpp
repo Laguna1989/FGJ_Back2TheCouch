@@ -21,6 +21,10 @@ public:
     {
         return im::pressed(m_rightKey);
     }
+    bool hasJustPressedJump()
+    {
+        return im::justPressed(m_jumpKey);
+    }
 
 private:
     int m_id { 0 };
@@ -30,14 +34,17 @@ private:
         if (m_id == 0) {
             m_leftKey = sf::Keyboard::Key::Left;
             m_rightKey = sf::Keyboard::Key::Right;
+            m_jumpKey = sf::Keyboard::Key::Up;
         } else if (m_id == 1) {
             m_leftKey = sf::Keyboard::Key::A;
             m_rightKey = sf::Keyboard::Key::D;
+            m_jumpKey = sf::Keyboard::Key::W;
         }
     }
 
     sf::Keyboard::Key m_rightKey;
     sf::Keyboard::Key m_leftKey;
+    sf::Keyboard::Key m_jumpKey;
 };
 
 #endif

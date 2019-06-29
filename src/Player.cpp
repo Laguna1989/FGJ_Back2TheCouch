@@ -84,15 +84,24 @@ void Player::updateMovement(float const elapsed)
     if (m_input.isRightPressed()) {
         getB2Body()->ApplyForceToCenter(b2Vec2 { GP::PlayerMovementAcceleration(), 0 }, true);
     }
-
+    if (m_input.hasJustPressedJump() && fabs(getB2Body()->GetLinearVelocity().y) < GP::PlayerVerticalSpeedJumpThreshold()) {
+        getB2Body()->ApplyLinearImpulseToCenter(b2Vec2 { 0, -GP::PlayerJumpImpulse() }, true);
+    }
     sf::Vector2f vel = JamTemplate::C::vec(getB2Body()->GetLinearVelocity());
 
     float actualVelX = MH::clamp(vel.x, -GP::PlayerMaxSpeedHorizontal(), GP::PlayerMaxSpeedHorizontal());
-    float actualVelY = MH::clamp(vel.y, -GP::PlayerMaxSpeedVertical(), GP::PlayerMaxSpeedVertical());
+    // Jumps can be as fast as the impulse allows (hence -inf).
+    float actualVelY = MH::clamp(vel.y, -INFINITY, GP::PlayerMaxSpeedVertical());
 
     getB2Body()->SetLinearVelocity(b2Vec2 { actualVelX, actualVelY });
 
     float vl = JamTemplate::MathHelper::length(vel);
+    /*
+	// Debug print: print the clamped velocity vector
+    if (vl > 0.001f) {
+        std::cout << actualVelX << ", " << actualVelY << std::endl;
+    }
+	*/
 
     if (std::fabs(vl) > 0.005f) // do exponential damping
     {

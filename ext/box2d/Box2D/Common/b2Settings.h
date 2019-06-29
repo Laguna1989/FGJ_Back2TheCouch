@@ -102,7 +102,7 @@ typedef double float64;
 
 /// The maximum linear velocity of a body. This limit is very large and is used
 /// to prevent numerical problems. You shouldn't need to adjust this.
-#define b2_maxTranslation 4.0f
+#define b2_maxTranslation 16.0f
 #define b2_maxTranslationSquared (b2_maxTranslation * b2_maxTranslation)
 
 /// The maximum angular velocity of a body. This limit is very large and is used
