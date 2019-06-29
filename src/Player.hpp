@@ -15,6 +15,7 @@ public:
     Player(StateGame& sg, const b2BodyDef* def, int id);
 
     void setB2Obj();
+    JamTemplate::Animation::Sptr getSprite() { return m_sprite; };
 
 private:
     StateGame& m_gameState;
