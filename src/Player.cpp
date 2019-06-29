@@ -25,12 +25,12 @@ void Player::setB2Obj()
     fixtureDef.friction = 0.9f;
 
     getB2Body()->CreateFixture(&fixtureDef);
-    getB2Body()->SetLinearDamping(0.9f);
+    getB2Body()->SetLinearDamping(0.09f);
 }
 
 void Player::doCreate()
 {
-    setPosition(sf::Vector2f { 20, 0 });
+    setPosition(sf::Vector2f { 20, 14 });
     m_sprite = std::make_shared<JamTemplate::Animation>();
     m_sprite->add("assets/coin.png", "idle", sf::Vector2u { 16, 16 }, JamTemplate::MathHelper::vectorBetween(0U, 11U), 0.15f);
     m_sprite->play("idle");

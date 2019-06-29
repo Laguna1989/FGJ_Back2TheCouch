@@ -28,7 +28,7 @@ public:
 
     static std::int32_t PhysicVelocityIterations() { return 2; };
     static std::int32_t PhysicPositionIterations() { return 2; };
-    static float PhysicsGravity() { return 50; };
+    static float PhysicsGravity() { return 500; };
     static float PlayerMovementAcceleration() { return 20000; };
 
     static float TileSpriteSize() { return 12; };
