@@ -152,3 +152,8 @@ void Player::SpawnShot()
 
     m_gameState.SpawnShot(shot);
 }
+
+void Player::getHitByShot(std::shared_ptr<Shot> shot)
+{
+    m_sprite->flash(0.125);
+}

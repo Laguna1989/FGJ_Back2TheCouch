@@ -9,6 +9,7 @@
 
 // forward declaration
 class StateGame;
+class Shot;
 
 class Player : public JamTemplate::Box2DObject {
 public:
@@ -16,6 +17,8 @@ public:
 
     void setB2Obj();
     JamTemplate::Animation::Sptr getSprite() { return m_sprite; };
+
+    void getHitByShot(std::shared_ptr<Shot> shot);
 
 private:
     StateGame& m_gameState;
