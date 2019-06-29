@@ -33,6 +33,16 @@ void StateGame::doInternalUpdate(float const elapsed)
                 break;
             }
         }
+        for (auto p : *m_players) {
+            auto player = p.lock();
+            if (player == nullptr) {
+                continue;
+            }
+            if (JamTemplate::Collision::BoundingBoxTest(shot->getSprite(), player->getSprite())) {
+                shot->Collide();
+                player->getHitByShot(shot);
+            }
+        }
     }
 }
 

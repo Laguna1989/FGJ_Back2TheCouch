@@ -27,6 +27,14 @@ void Level::LoadLevel(std::string const& fileName)
             }
         }
     }
+    for (int i = 0; i != levelImage.getSize().x; ++i) {
+        AddTile(i, 0, TileType::TileType::Platform);
+        AddTile(i, levelImage.getSize().y, TileType::TileType::Platform);
+    }
+    for (int j = 0; j != levelImage.getSize().y; ++j) {
+        AddTile(0, j, TileType::TileType::Platform);
+        AddTile(levelImage.getSize().x, j, TileType::TileType::Platform);
+    }
 }
 
 void Level::AddTile(int x, int y, TileType::TileType type)
