@@ -19,6 +19,7 @@ public:
     JamTemplate::Animation::Sptr getSprite() { return m_sprite; };
 
     void getHitByShot(std::shared_ptr<Shot> shot);
+    int getId() { return m_id; };
 
 private:
     StateGame& m_gameState;

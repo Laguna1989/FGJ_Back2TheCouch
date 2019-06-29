@@ -33,7 +33,9 @@ void StateGame::doInternalUpdate(float const elapsed)
                 break;
             }
         }
-        for (auto p : *m_players) {
+        for (size_t i = 0; i != m_players->size(); ++i) {
+            auto p = m_players->at(i);
+            size_t iOther = (i + 1) % 2;
             auto player = p.lock();
             if (player == nullptr) {
                 continue;
@@ -41,18 +43,19 @@ void StateGame::doInternalUpdate(float const elapsed)
             if (JamTemplate::Collision::BoundingBoxTest(shot->getSprite(), player->getSprite())) {
                 shot->Collide();
                 player->getHitByShot(shot);
+                score(m_players->at(iOther).lock()->getId(), GP::PointsForHit());
             }
         }
     }
 
-    for (auto p : *m_players) {
-        auto player = p.lock();
-        if (player == nullptr) {
-            continue;
-        }
+    for (size_t i = 0; i != m_players->size(); ++i) {
+        auto p = m_players->at(i);
+        size_t iOther = (i + 1) % 2;
 
+        auto player = p.lock();
         if (JamTemplate::Collision::BoundingBoxTest(player->getSprite(), m_lava->getSprite())) {
             respawn(player);
+            score(m_players->at(iOther).lock()->getId(), GP::PointsForOtherPlayerDyingInAFire());
             player->update(0.0f);
         }
     }
@@ -124,4 +127,13 @@ void StateGame::respawn(std::shared_ptr<Player> player)
     // TODO: wait for a while
     auto pos = m_level->getSpawnPositionAbove(m_lava->getHeight());
     player->setPosition(pos);
+}
+
+void StateGame::score(int playerId, int score)
+{
+    if (playerId == 0) {
+        m_hud->AddScoreP1(score);
+    } else {
+        m_hud->AddScoreP2(score);
+    }
 }

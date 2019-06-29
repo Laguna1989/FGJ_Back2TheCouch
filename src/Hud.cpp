@@ -53,7 +53,7 @@ void Hud::doCreate()
     m_scoreP1Text->setOutline(2, GP::Player1SecondaryColor());
     m_scoreP1Text->update(0.0f);
     m_scoreP1Text->SetTextAlign(JamTemplate::SmartText::TextAlign::LEFT);
-    m_scoreP1Text->setPosition({ 24.0f, 0 });
+    m_scoreP1Text->setPosition({ 8.0f, 0 });
 
     m_scoreP2Text = std::make_shared<JamTemplate::SmartText>();
     m_scoreP2Text->loadFont("assets/font.ttf");
@@ -61,14 +61,14 @@ void Hud::doCreate()
     m_scoreP2Text->setColor(sf::Color { 248, 249, 254 });
     m_scoreP2Text->setOutline(2, GP::Player2SecondaryColor());
     m_scoreP2Text->update(0.0f);
-    m_scoreP2Text->SetTextAlign(JamTemplate::SmartText::TextAlign::LEFT);
-    m_scoreP2Text->setPosition({ getGame()->getRenderTarget()->getSize().x - 16.0f, 0 });
+    m_scoreP2Text->SetTextAlign(JamTemplate::SmartText::TextAlign::RIGHT);
+    m_scoreP2Text->setPosition({ getGame()->getRenderTarget()->getSize().x - 4.0f, 0 });
 
     m_timerText = std::make_shared<JamTemplate::SmartText>();
     m_timerText->loadFont("assets/font.ttf");
     m_timerText->setCharacterSize(16U);
     m_timerText->setColor(sf::Color { 248, 249, 254 });
     m_timerText->setOutline(2, sf::Color { 60, 60, 70 });
-    m_timerText->SetTextAlign(JamTemplate::SmartText::TextAlign::LEFT);
+    m_timerText->SetTextAlign(JamTemplate::SmartText::TextAlign::CENTER);
     m_timerText->update(0.0f);
 }
