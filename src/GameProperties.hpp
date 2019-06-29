@@ -38,7 +38,7 @@ public:
 
     static float PlayerMovementAcceleration() { return 65000.0f; };
     static float PlayerFriction() { return 0.01f; };
-    static float PlayerDensity() { return 1.0f; };
+    static float PlayerDensity() { return 1.0f * 6.0f / 3.5f; };
     static float PlayerMaxSpeedHorizontal() { return 125.0f; };
     static float PlayerMaxSpeedVertical() { return 500.0f; };
     static float PlayerJumpImpulse() { return 85000.0f; };

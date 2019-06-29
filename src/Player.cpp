@@ -19,7 +19,7 @@ Player::Player(StateGame& sg, const b2BodyDef* def, int id)
 void Player::setB2Obj()
 {
     b2PolygonShape dynamicBox;
-    dynamicBox.SetAsBox(static_cast<float32>(GP::SpriteSize()) / 2.0f, static_cast<float32>(GP::SpriteSize()) / 2.0f);
+    dynamicBox.SetAsBox(static_cast<float32>(GP::SpriteSize()) / 2.0f - 2.5, static_cast<float32>(GP::SpriteSize()) / 2.0f);
 
     b2FixtureDef fixtureDef;
 
