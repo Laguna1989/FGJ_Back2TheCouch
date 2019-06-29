@@ -14,7 +14,7 @@ public:
     static float GameBoardInputOffsetMax() { return 300; }
     static unsigned int GameBoardMaxParse() { return 20; }
 
-    static unsigned int PlayfieldWidth() { return 800; }
+    static unsigned int PlayfieldWidth() { return 828; }
     static unsigned int PlayfieldHeight() { return 600; }
     static unsigned int PixelScalingFactor() { return 3; }
 
@@ -54,7 +54,7 @@ public:
     static float TileFriction() { return 0.48f; };
     static float TileDensity() { return 1.0f; };
 
-    static float ShotVelocity() { return 250; };
+    static float ShotVelocity() { return 275; };
     static float ShotTimer() { return 0.25; };
     static float ShotInvincibleTime() { return 0.1f; };
     static float ShotKnockbackHorizontal() { return 45000.0f; };

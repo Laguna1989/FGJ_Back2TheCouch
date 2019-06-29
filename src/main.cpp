@@ -2,6 +2,7 @@
 #include "JamTemplate/Game.hpp"
 #include "JamTemplate/TextureManager.hpp"
 #include "StateMenu.hpp"
+#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 
 int main()
@@ -18,6 +19,11 @@ int main()
 
     JamTemplate::TextureManager::addselectiveColorReplacement(0, { std::make_pair(sf::Color { 23, 255, 0 }, GP::Player1PrimaryColor()), std::make_pair(sf::Color { 255, 0, 139 }, GP::Player1SecondaryColor()), std::make_pair(sf::Color { 101, 0, 55 }, GP::Player1TertiaryColor()) });
     JamTemplate::TextureManager::addselectiveColorReplacement(1, { std::make_pair(sf::Color { 23, 255, 0 }, GP::Player2PrimaryColor()), std::make_pair(sf::Color { 255, 0, 139 }, GP::Player2SecondaryColor()), std::make_pair(sf::Color { 101, 0, 55 }, GP::Player2TertiaryColor()) });
+
+    //sf::Music music;
+    //if (!music.openFromFile("music.ogg"))
+    //    return -1; // error
+    //music.play();
 
     while (window->isOpen()) {
         sf::Time elapsed = clock.restart();

@@ -129,12 +129,6 @@ void Player::updateMovement(float const elapsed)
     getB2Body()->SetLinearVelocity(b2Vec2 { actualVelX, actualVelY });
 
     float vl = JamTemplate::MathHelper::length(vel);
-    /*
-	// Debug print: print the clamped velocity vector
-    if (vl > 0.001f) {
-        std::cout << actualVelX << ", " << actualVelY << std::endl;
-    }
-	*/
 
     if (std::fabs(vl) > 0.005f) // do exponential damping
     {
@@ -147,7 +141,7 @@ void Player::SpawnShot()
 {
     m_shotTimer = GP::ShotTimer();
     sf::Vector2f ofs { 0, -4 };
-    sf::Vector2f vel { GP::ShotVelocity(), JamTemplate::Random::getFloat(-10, 10) };
+    sf::Vector2f vel { GP::ShotVelocity(), JamTemplate::Random::getFloat(-10, 5) };
     b2Vec2 recoilImpulse;
     if (m_facingRight) {
         ofs.x += GP::SpriteSize();

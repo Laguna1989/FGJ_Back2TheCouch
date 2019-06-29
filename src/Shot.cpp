@@ -26,7 +26,7 @@ void Shot::doCreate()
 
 void Shot::doUpdate(float const elapsed)
 {
-    if (static_cast<float>(getAge() - elapsed) < 0.1 && getAge() >= 0.1) {
+    if (static_cast<float>(getAge() - elapsed) < 0.15 && getAge() >= 0.15) {
         Start2Move();
     }
 
