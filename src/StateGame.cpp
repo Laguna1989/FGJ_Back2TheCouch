@@ -74,7 +74,7 @@ void StateGame::doInternalUpdate(float const elapsed)
 void StateGame::doInternalDraw() const
 {
     m_level->m_backgroundImage->draw(getGame()->getRenderTarget());
-
+    m_couch->draw();
     drawObjects();
     m_lava->draw();
     m_overlay->draw(getGame()->getRenderTarget());
@@ -116,6 +116,12 @@ void StateGame::doCreateInternal()
     AddPlayer(1);
     m_shots = std::make_shared<JamTemplate::ObjectGroup<Shot>>();
     m_lava = std::make_shared<Lava>(*this, 2143);
+    b2BodyDef couchBodyDef;
+    couchBodyDef.fixedRotation = true;
+    couchBodyDef.allowSleep = false;
+    couchBodyDef.type = b2_dynamicBody;
+    m_couch = std::make_shared<Couch>(*this, &couchBodyDef);
+    add(m_couch);
     add(m_lava);
 }
 

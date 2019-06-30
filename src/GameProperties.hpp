@@ -71,6 +71,8 @@ public:
     static int PointsForHit() { return 1; };
     static int PointsForOtherPlayerDyingInAFire() { return 4; };
     static int PointsForReturningToTheCouch() { return 40; };
+
+    static float CouchTorque() { return 0.0f; };
 };
 
 #endif
