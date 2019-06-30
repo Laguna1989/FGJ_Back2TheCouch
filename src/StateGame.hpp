@@ -58,6 +58,7 @@ private:
 
     virtual void doInternalUpdate(float const elapsed) override;
     void CheckForTimeEnd();
+    void EndGame();
     virtual void doInternalDraw() const override;
 
     void AddPlayer(int id);
@@ -67,6 +68,7 @@ private:
     void CollideShotsTiles(std::shared_ptr<Shot> shot);
     void CollideShotsPlayers(std::shared_ptr<Shot> shot);
     void CollidePlayersLava();
+    void CollidePlayersCouch();
 };
 
 #endif
