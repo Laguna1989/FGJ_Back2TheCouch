@@ -49,6 +49,7 @@ void StateHighscore::doCreate()
 
     add(m_hud);
     m_hud->DisableTimer();
+    m_hud->setReturnToCouchTextVisible(false);
 
     //m_playerWin   = std::make_shared;
     //m_playerLoose = std::make_shared;

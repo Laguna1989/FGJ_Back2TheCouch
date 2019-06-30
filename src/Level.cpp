@@ -82,7 +82,7 @@ sf::Vector2f Level::getSpawnPositionAbove(float minHeight) const
 {
     std::vector<sf::Vector2i> vec;
     std::copy_if(m_spawnPositions.begin(), m_spawnPositions.end(), std::back_inserter(vec), [minHeight](auto const& v) {
-        return v.y < ((minHeight / GP::SpriteSize()) - 1);
+        return v.y < ((minHeight / GP::SpriteSize()) - 2);
     });
     std::sort(vec.begin(), vec.end(), [](auto const& a, auto const& b) -> bool { return a.y > b.y; });
     // If there are multiple lowest spawn points at the same height, pick one at random.

@@ -32,6 +32,11 @@ void StateGame::doInternalUpdate(float const elapsed)
 
         CollidePlayersLava();
     }
+    if (!m_returnToCouch && getAge() >= GP::ReturnToCouchTime()) {
+        m_returnToCouch = true;
+        m_hud->setReturnToCouchTextVisible(true);
+        // TODO: Enable high scoring + game end on couch collision
+    }
 }
 
 void StateGame::CheckForTimeEnd()
@@ -155,15 +160,14 @@ void StateGame::AddPlayer(int id)
     playerBodyDef.type = b2_dynamicBody;
 
     auto player = std::make_shared<Player>(*this, &playerBodyDef, id);
-    player->setPosition(m_level->getSpawnPosition(id));
+    player->setPosition(GP::CouchSpawnPosition() + sf::Vector2f { id * 36.0f, -24.0f });
+    player->setFacingRight(id == 0);
     add(player);
     m_players->emplace_back(player);
 }
 
 void StateGame::respawn(std::shared_ptr<Player> player)
 {
-    // TODO: modify scores to reflect player's failure
-    // TODO: wait for a while
     auto pos = m_level->getSpawnPositionAbove(m_lava->getHeight());
     player->setPosition(pos);
 }

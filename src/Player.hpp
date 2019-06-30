@@ -20,6 +20,7 @@ public:
 
     void getHitByShot(std::shared_ptr<Shot> shot);
     int getId() { return m_id; };
+    void setFacingRight(bool facingRight) { m_facingRight = facingRight; };
 
     void Deactivate() { m_active = false; }
 

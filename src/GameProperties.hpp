@@ -1,7 +1,7 @@
 #ifndef GAME_GAMEPROPERTIES_HPP_INCLUDEGUARD
 #define GAME_GAMEPROPERTIES_HPP_INCLUDEGUARD
 
-#include <SFML/Graphics/Color.hpp>
+#include <SFML/Graphics.hpp>
 #include <string>
 
 class GP {
@@ -67,12 +67,12 @@ public:
     static float LavaStartTime() { return 10.0f; };
     static float LavaStopTime() { return 75.0f; };
     static float TotalGameTime() { return 5.0f; };
-
+    static float ReturnToCouchTime() { return 80.0f; };
     static int PointsForHit() { return 1; };
     static int PointsForOtherPlayerDyingInAFire() { return 4; };
     static int PointsForReturningToTheCouch() { return 40; };
 
-    static float CouchTorque() { return 0.0f; };
+    static sf::Vector2f CouchSpawnPosition() { return sf::Vector2f { 114.0f, 132.0f }; };
 };
 
 #endif
