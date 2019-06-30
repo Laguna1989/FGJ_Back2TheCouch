@@ -1,7 +1,7 @@
 #ifndef GAME_GAMEPROPERTIES_HPP_INCLUDEGUARD
 #define GAME_GAMEPROPERTIES_HPP_INCLUDEGUARD
 
-#include <SFML/Graphics/Color.hpp>
+#include <SFML/Graphics.hpp>
 #include <string>
 
 class GP {
@@ -72,7 +72,7 @@ public:
     static int PointsForOtherPlayerDyingInAFire() { return 4; };
     static int PointsForReturningToTheCouch() { return 40; };
 
-    static float CouchTorque() { return 0.0f; };
+    static sf::Vector2f CouchSpawnPosition() { return sf::Vector2f { 114.0f, 132.0f }; };
 };
 
 #endif
