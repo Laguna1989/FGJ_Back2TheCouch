@@ -7,20 +7,26 @@ namespace JamTemplate {
 class SmartText;
 class SmartShape;
 class SmartSprite;
+class Animation;
 }
+
+class Hud;
 
 class StateHighscore : public JamTemplate::GameState {
 public:
-    StateHighscore(int p1Points, int p2Points);
+    StateHighscore(std::shared_ptr<Hud> hud);
 
 private:
-    std::shared_ptr<JamTemplate::SmartSprite> m_background;
+    std::vector<std::shared_ptr<JamTemplate::Animation>> m_backgroundAnims;
+    std::shared_ptr<JamTemplate::SmartShape> m_backgroundYellow;
+    std::shared_ptr<JamTemplate::SmartShape> m_backgroundRed;
 
-    mutable std::shared_ptr<JamTemplate::SmartText> m_text_Title;
-    std::shared_ptr<JamTemplate::SmartText> m_test_Explanation;
-    std::shared_ptr<JamTemplate::SmartText> m_text_Credits;
+    std::shared_ptr<JamTemplate::Animation> m_playerWin;
+    std::shared_ptr<JamTemplate::Animation> m_playerLoose;
 
     std::shared_ptr<JamTemplate::SmartShape> m_overlay;
+
+    std::shared_ptr<Hud> m_hud;
 
     bool m_starting { false };
 

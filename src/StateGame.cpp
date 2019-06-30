@@ -7,7 +7,7 @@
 #include "JamTemplate/SmartShape.hpp"
 #include "JamTemplate/SmartSprite.hpp"
 #include "JamTemplate/TweenAlpha.hpp"
-#include "StateMenu.hpp"
+#include "StateHighScore.hpp"
 
 void StateGame::doInternalUpdate(float const elapsed)
 {
@@ -39,7 +39,8 @@ void StateGame::CheckForTimeEnd()
     if (GP::TotalGameTime() - getAge() < 0) {
         m_switching = true;
         auto tw = JamTemplate::TweenAlpha<JamTemplate::SmartShape>::create(m_overlay, 1.25f, sf::Uint8 { 0 }, sf::Uint8 { 255 });
-        tw->addCompleteCallback([this]() { getGame()->switchState(std::make_shared<StateMenu>()); });
+
+        tw->addCompleteCallback([this]() { getGame()->switchState(std::make_shared<StateHighscore>(m_hud)); });
         add(tw);
         for (auto p : *m_players) {
             p.lock()->Deactivate();

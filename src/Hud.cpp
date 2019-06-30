@@ -40,8 +40,9 @@ void Hud::doDraw() const
 {
     m_scoreP1Text->draw(getGame()->getRenderTarget());
     m_scoreP2Text->draw(getGame()->getRenderTarget());
-
-    m_timerText->draw(getGame()->getRenderTarget());
+    if (m_drawTimer) {
+        m_timerText->draw(getGame()->getRenderTarget());
+    }
 }
 
 void Hud::doCreate()
