@@ -61,6 +61,10 @@ private:
     void AddPlayer(int id);
     void respawn(std::shared_ptr<Player>);
     void score(int playerId, int score);
+
+    void CollideShotsTiles(std::shared_ptr<Shot> shot);
+    void CollideShotsPlayers(std::shared_ptr<Shot> shot);
+    void CollidePlayersLava();
 };
 
 #endif

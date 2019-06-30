@@ -28,36 +28,48 @@ void StateGame::doInternalUpdate(float const elapsed)
         if (shot == nullptr) {
             continue;
         }
-        if (!shot->isAlive() || !shot->m_movementStarted || shot->m_collided) {
+        if (shot->isShotInValid()) {
             continue;
         }
-        for (auto t : *m_level->getTiles()) {
-            auto tile = t.lock();
-            if (tile == nullptr) {
-                continue;
-            }
-
-            if (JamTemplate::Collision::BoundingBoxTest(tile->getSprite(), shot->getSprite())) {
-                //shot->kill();
-                shot->Collide();
-                break;
-            }
-        }
-        for (size_t i = 0; i != m_players->size(); ++i) {
-            auto p = m_players->at(i);
-            size_t iOther = (i + 1) % 2;
-            auto player = p.lock();
-            if (player == nullptr) {
-                continue;
-            }
-            if (JamTemplate::Collision::BoundingBoxTest(shot->getSprite(), player->getSprite())) {
-                shot->Collide();
-                player->getHitByShot(shot);
-                score(m_players->at(iOther).lock()->getId(), GP::PointsForHit());
-            }
-        }
+        CollideShotsTiles(shot);
+        CollideShotsPlayers(shot);
     }
 
+    CollidePlayersLava();
+}
+
+void StateGame::CollideShotsTiles(std::shared_ptr<Shot> shot)
+{
+    for (auto t : *m_level->getTiles()) {
+        auto tile = t.lock();
+        if (tile == nullptr) {
+            continue;
+        }
+
+        if (JamTemplate::Collision::BoundingBoxTest(tile->getSprite(), shot->getSprite())) {
+            shot->Collide();
+            break;
+        }
+    }
+}
+void StateGame::CollideShotsPlayers(std::shared_ptr<Shot> shot)
+{
+    for (size_t i = 0; i != m_players->size(); ++i) {
+        auto p = m_players->at(i);
+        size_t iOther = (i + 1) % 2;
+        auto player = p.lock();
+        if (player == nullptr) {
+            continue;
+        }
+        if (JamTemplate::Collision::BoundingBoxTest(shot->getSprite(), player->getSprite())) {
+            shot->Collide();
+            player->getHitByShot(shot);
+            score(m_players->at(iOther).lock()->getId(), GP::PointsForHit());
+        }
+    }
+}
+void StateGame::CollidePlayersLava()
+{
     for (size_t i = 0; i != m_players->size(); ++i) {
         auto p = m_players->at(i);
         size_t iOther = (i + 1) % 2;

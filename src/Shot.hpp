@@ -28,6 +28,11 @@ public:
         }
     }
 
+    bool isShotInValid()
+    {
+        return (!isAlive() || !m_movementStarted || m_collided);
+    }
+
     JamTemplate::Animation::Sptr getSprite();
 
     bool m_collided { false };
