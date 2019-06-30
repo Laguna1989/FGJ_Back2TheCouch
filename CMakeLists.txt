@@ -6,6 +6,8 @@ cmake_minimum_required (VERSION 2.6)
 set (PROJECTNAME "Back2TheCouch") 
 
 set (GAMEFILES 
+	src/Bubble.cpp
+	src/Bubble.hpp
 	src/GameProperties.hpp
 	src/GameProperties.cpp
 	src/Hud.hpp
@@ -18,10 +20,12 @@ set (GAMEFILES
 	src/Player.cpp
 	src/Player.hpp
 	src/PlayerInput.hpp
-	src/StateGame.hpp
 	src/Shot.cpp
 	src/Shot.hpp
+	src/StateGame.hpp
 	src/StateGame.cpp
+	src/StateHighscore.hpp
+	src/StateHighscore.cpp
 	src/StateMenu.hpp
 	src/StateMenu.cpp
 	src/Tile.hpp

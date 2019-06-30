@@ -4,6 +4,7 @@
 #include "GameProperties.hpp"
 #include "JamTemplate/Animation.hpp"
 #include "JamTemplate/Box2DObject.hpp"
+#include "JamTemplate/ObjectGroup.hpp"
 #include "JamTemplate/SmartShape.hpp"
 #include "PlayerInput.hpp"
 #include <Box2D/Box2D.h>
@@ -23,8 +24,10 @@ private:
     int m_id { 0 };
 
     JamTemplate::SmartShape::Sptr m_lavaShape;
+    //JamTemplate::ObjectGroup<
 
-    virtual void doCreate();
+    virtual void
+    doCreate();
     virtual void doUpdate(float const /*elapsed*/);
     virtual void doDraw() const;
 };

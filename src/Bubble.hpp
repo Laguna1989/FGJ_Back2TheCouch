@@ -1,16 +1,15 @@
-#ifndef SHOT_HPP_INCLUDEGUARD
-#define SHOT_HPP_INCLUDEGUARD
+#ifndef BUBBLE_HPP_INCLUDEGUARD
+#define BUBBLE_HPP_INCLUDEGUARD
 
 #include "JamTemplate/Animation.hpp"
 #include "JamTemplate/GameObject.hpp"
-#include "JamTemplate/SmartShape.hpp"
 #include "JamTemplate/Transform.hpp"
 #include "PlayerInput.hpp"
 #include <Box2D/Box2D.h>
 
 class StateGame;
 
-class Shot : public JamTemplate::GameObject, public JamTemplate::Transform {
+class Bubble : public JamTemplate::GameObject, public JamTemplate::Transform {
 public:
     Shot(StateGame& sg);
 
