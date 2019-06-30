@@ -160,6 +160,7 @@ void StateGame::doCreate()
 
     doCreateInternal();
     add(m_hud);
+    m_level->update(0.0f);
 }
 
 void StateGame::doCreateInternal()
