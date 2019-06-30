@@ -46,6 +46,7 @@ void Level::AddTile(int x, int y, TileType::TileType type)
     wallBodyDef.allowSleep = false;
 
     std::shared_ptr<Tile> t = std::make_shared<Tile>(x, y, TileType::TileType::Platform, &wallBodyDef, m_gameState.getWorld());
+
     m_tiles->emplace_back(t);
     m_gameState.add(t);
 }

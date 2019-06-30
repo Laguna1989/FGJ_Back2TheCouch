@@ -387,3 +387,5 @@ ASALocalRun/
 build
 
 ext/SFML-2.5.1_win
+
+*.wav

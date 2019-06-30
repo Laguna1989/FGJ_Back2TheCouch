@@ -51,7 +51,7 @@ private:
 
         SetTexture();
         setB2Obj();
-
+        m_sprite->setColor(sf::Color { 0, 0, 0, 0 });
         updatePosition();
     }
 
