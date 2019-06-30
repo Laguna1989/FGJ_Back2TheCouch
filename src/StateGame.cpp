@@ -31,25 +31,30 @@ void StateGame::doInternalUpdate(float const elapsed)
         }
 
         CollidePlayersLava();
+        CollidePlayersCouch();
     }
     if (!m_returnToCouch && getAge() >= GP::ReturnToCouchTime()) {
         m_returnToCouch = true;
         m_hud->setReturnToCouchTextVisible(true);
-        // TODO: Enable high scoring + game end on couch collision
     }
 }
 
 void StateGame::CheckForTimeEnd()
 {
     if (GP::TotalGameTime() - getAge() < 0) {
-        m_switching = true;
-        auto tw = JamTemplate::TweenAlpha<JamTemplate::SmartShape>::create(m_overlay, 1.25f, sf::Uint8 { 0 }, sf::Uint8 { 255 });
+        EndGame();
+    }
+}
 
-        tw->addCompleteCallback([this]() { getGame()->switchState(std::make_shared<StateHighscore>(m_hud)); });
-        add(tw);
-        for (auto p : *m_players) {
-            p.lock()->Deactivate();
-        }
+void StateGame::EndGame()
+{
+    m_switching = true;
+    auto tw = JamTemplate::TweenAlpha<JamTemplate::SmartShape>::create(m_overlay, 1.25f, sf::Uint8 { 0 }, sf::Uint8 { 255 });
+
+    tw->addCompleteCallback([this]() { getGame()->switchState(std::make_shared<StateHighscore>(m_hud)); });
+    add(tw);
+    for (auto p : *m_players) {
+        p.lock()->Deactivate();
     }
 }
 
@@ -94,6 +99,22 @@ void StateGame::CollidePlayersLava()
             respawn(player);
             score(m_players->at(iOther).lock()->getId(), GP::PointsForOtherPlayerDyingInAFire());
             player->update(0.0f);
+        }
+    }
+}
+
+void StateGame::CollidePlayersCouch()
+{
+    if (!m_returnToCouch) {
+        return;
+    }
+    for (size_t i = 0; i != m_players->size(); ++i) {
+        auto p = m_players->at(i);
+        auto player = p.lock();
+        if (JamTemplate::Collision::BoundingBoxTest(player->getSprite(), m_couch->getSprite())) {
+            score(player->getId(), GP::PointsForReturningToTheCouch());
+            player->update(0.0f);
+            EndGame();
         }
     }
 }
