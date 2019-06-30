@@ -6,6 +6,7 @@
 namespace JamTemplate {
 class SmartText;
 class SmartShape;
+class SmartSprite;
 }
 
 class StateMenu : public JamTemplate::GameState {
@@ -13,13 +14,15 @@ public:
     StateMenu();
 
 private:
-    std::shared_ptr<JamTemplate::SmartShape> m_background;
+    std::shared_ptr<JamTemplate::SmartSprite> m_background;
 
     mutable std::shared_ptr<JamTemplate::SmartText> m_text_Title;
-    std::shared_ptr<JamTemplate::SmartText> m_test_Explanation;
-    std::shared_ptr<JamTemplate::SmartText> m_text_Credits;
+    mutable std::shared_ptr<JamTemplate::SmartSprite> m_text_start;
+    mutable std::shared_ptr<JamTemplate::SmartSprite> m_text_start2;
 
     std::shared_ptr<JamTemplate::SmartShape> m_overlay;
+
+    std::shared_ptr<JamTemplate::SmartSprite> m_title;
 
     bool m_starting { false };
 

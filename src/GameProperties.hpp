@@ -18,10 +18,10 @@ public:
     static unsigned int PlayfieldHeight() { return 600; }
     static unsigned int PixelScalingFactor() { return 3; }
 
-    static sf::Color Player1PrimaryColor() { return sf::Color { 121, 65, 0 }; };
+    static sf::Color Player1PrimaryColor() { return sf::Color { 252, 114, 232 }; };
     static sf::Color Player1SecondaryColor() { return sf::Color { 219, 65, 195 }; };
     static sf::Color Player1TertiaryColor() { return sf::Color { 154, 32, 121 }; };
-    static sf::Color Player2PrimaryColor() { return sf::Color { 255, 162, 0 }; };
+    static sf::Color Player2PrimaryColor() { return sf::Color { 140, 242, 255 }; };
     static sf::Color Player2SecondaryColor() { return sf::Color { 97, 211, 227 }; };
     static sf::Color Player2TertiaryColor() { return sf::Color { 65, 146, 195 }; };
 
@@ -34,7 +34,7 @@ public:
     static sf::Color PaletteFlashGreen() { return sf::Color { 51, 143, 63 }; };
     static sf::Color PaletteFlashRed() { return sf::Color { 143, 33, 33 }; };
 
-    static std::string GameName() { return "Back 2 The Couch"; };
+    static std::string GameName() { return "grounded"; };
 
     static std::int32_t PhysicVelocityIterations() { return 8; };
     static std::int32_t PhysicPositionIterations() { return 2; };

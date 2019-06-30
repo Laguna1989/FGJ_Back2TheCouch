@@ -30,9 +30,17 @@ public:
     void finish()
     {
         handleCompleteCallbacks();
-        kill();
+        if (m_repeat) {
+            m_age = 0;
+        } else {
+            kill();
+        }
     }
 
+    void setRepeat(bool repeat)
+    {
+        m_repeat = true;
+    }
     void update(float elapsed)
     {
         if (m_skipFrames > 0) {
@@ -81,6 +89,7 @@ private:
     float m_age { 0.0f };
     float m_startDelay {};
     bool m_alive { true };
+    bool m_repeat { false };
 
     std::vector<CallbackType> m_completeCallbacks;
 
@@ -107,7 +116,7 @@ protected:
 private:
     std::weak_ptr<T> m_obj;
 
-    // callback function. If the callback returns false, the tween shall be finished.
+    // callback function. If the callback returns false, the tween shall call finish.
     Callback_type m_tweenCallback;
     void doUpdate(float /*elapsed*/) override
     {
