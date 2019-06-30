@@ -155,6 +155,7 @@ void Player::updateMovement(float const elapsed)
 
 void Player::SpawnShot()
 {
+
     m_shotSound.play();
     m_shotTimer = GP::ShotTimer();
     sf::Vector2f ofs { 0, -4 };
@@ -182,6 +183,7 @@ void Player::SpawnShot()
 void Player::getHitByShot(std::shared_ptr<Shot> shot)
 {
     m_sprite->flash(0.125);
+    m_sprite->shake(0.2, 1);
     b2Vec2 knockbackImpulse;
     if (shot->getVelocity().x < 0.0f) {
         knockbackImpulse = b2Vec2 { -GP::ShotKnockbackHorizontal(), -GP::ShotKnockbackVertical() };
