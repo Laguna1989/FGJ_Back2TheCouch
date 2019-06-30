@@ -46,6 +46,19 @@ void Player::doCreate()
     m_closeCombatAttackArea->makeRect(sf::Vector2f { 24, 20 });
     m_closeCombatAttackArea->setOffset(sf::Vector2f { 8, 6 });
     m_closeCombatAttackArea->setOrigin(sf::Vector2f { 8, 10 });
+
+    if (m_id == 0) {
+        // Player 1 sounds
+        m_soundBufferHop.loadFromFile("assets/hop.wav");
+        m_soundBufferShot.loadFromFile("assets/shot.wav");
+    } else {
+        // Player 2 sounds
+        m_soundBufferHop.loadFromFile("assets/hop2.wav");
+        m_soundBufferShot.loadFromFile("assets/shot2.wav");
+    }
+    m_hopSound.setBuffer(m_soundBufferHop);
+    m_shotSound.setBuffer(m_soundBufferShot);
+    m_shotSound.setVolume(50);
 }
 
 void Player::doUpdate(float const elapsed)
@@ -120,6 +133,7 @@ void Player::updateMovement(float const elapsed)
         m_facingRight = true;
     }
     if (m_input.hasJustPressedJump() && fabs(getB2Body()->GetLinearVelocity().y) < GP::PlayerVerticalSpeedJumpThreshold()) {
+        m_hopSound.play();
         getB2Body()->ApplyLinearImpulseToCenter(b2Vec2 { 0, -GP::PlayerJumpImpulse() }, true);
     }
     sf::Vector2f vel = JamTemplate::C::vec(getB2Body()->GetLinearVelocity());
@@ -141,6 +155,7 @@ void Player::updateMovement(float const elapsed)
 
 void Player::SpawnShot()
 {
+    m_shotSound.play();
     m_shotTimer = GP::ShotTimer();
     sf::Vector2f ofs { 0, -4 };
     sf::Vector2f vel { GP::ShotVelocityStart(), JamTemplate::Random::getFloat(-10, 5) };

@@ -52,6 +52,11 @@ private:
     bool m_switching { false };
     bool m_returnToCouch { false };
 
+    sf::SoundBuffer m_soundBufferLavaDrop {};
+    sf::Sound m_lavaDropSound {};
+    sf::SoundBuffer m_soundBufferEndGame {};
+    sf::Sound m_endGameSound {};
+
     void doCreate() override;
 
     virtual void doCreateInternal();

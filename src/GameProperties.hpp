@@ -43,20 +43,20 @@ public:
     static unsigned int SpriteSize() { return 12; };
     static float SpriteLinearDamping() { return 0.085f; };
 
-    static float PlayerMovementAcceleration() { return 65000.0f; };
+    static float PlayerMovementAcceleration() { return 67000.0f; };
     static float PlayerFriction() { return 0.01f; };
     static float PlayerDensity() { return 1.0f * 6.0f / 3.5f; };
     static float PlayerMaxSpeedHorizontal() { return 125.0f; };
     static float PlayerMaxSpeedVertical() { return 500.0f; };
-    static float PlayerJumpImpulse() { return 85000.0f; };
+    static float PlayerJumpImpulse() { return 86000.0f; };
     static float PlayerVerticalSpeedJumpThreshold() { return 1e-4f; };
 
-    static float TileFriction() { return 0.48f; };
+    static float TileFriction() { return 0.60f; };
     static float TileDensity() { return 1.0f; };
 
     static float ShotVelocityStart() { return 220; };
     static float ShotVelocityMax() { return 325; };
-    static float ShotTimer() { return 0.25; };
+    static float ShotTimer() { return 0.33; };
     static float ShotInvincibleTime() { return 0.1f; };
     static float ShotKnockbackHorizontal() { return 45000.0f; };
     static float ShotKnockbackVertical() { return 25000.0f; };

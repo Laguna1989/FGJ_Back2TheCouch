@@ -6,6 +6,7 @@
 #include "JamTemplate/SmartShape.hpp"
 #include "PlayerInput.hpp"
 #include <Box2D/Box2D.h>
+#include <SFML/Audio.hpp>
 
 // forward declaration
 class StateGame;
@@ -29,6 +30,11 @@ private:
     int m_id { 0 };
     PlayerInput m_input;
     bool m_active { true };
+
+    sf::SoundBuffer m_soundBufferHop {};
+    sf::Sound m_hopSound {};
+    sf::SoundBuffer m_soundBufferShot {};
+    sf::Sound m_shotSound {};
 
     JamTemplate::Animation::Sptr m_sprite;
 
