@@ -49,13 +49,14 @@ void StateGame::CheckForTimeEnd()
 void StateGame::EndGame()
 {
     m_switching = true;
-    auto tw = JamTemplate::TweenAlpha<JamTemplate::SmartShape>::create(m_overlay, 1.25f, sf::Uint8 { 0 }, sf::Uint8 { 255 });
+    auto tw = JamTemplate::TweenAlpha<JamTemplate::SmartShape>::create(m_overlay, 3.0f, sf::Uint8 { 0 }, sf::Uint8 { 255 });
 
     tw->addCompleteCallback([this]() { getGame()->switchState(std::make_shared<StateHighscore>(m_hud)); });
     add(tw);
     for (auto p : *m_players) {
         p.lock()->Deactivate();
     }
+    m_endGameSound.play();
 }
 
 void StateGame::CollideShotsTiles(std::shared_ptr<Shot> shot)
@@ -99,6 +100,7 @@ void StateGame::CollidePlayersLava()
             respawn(player);
             score(m_players->at(iOther).lock()->getId(), GP::PointsForOtherPlayerDyingInAFire());
             player->update(0.0f);
+            m_lavaDropSound.play();
         }
     }
 }
@@ -148,6 +150,13 @@ void StateGame::doCreate()
     auto tw = TweenAlpha<SmartShape>::create(m_overlay, 0.5f, sf::Uint8 { 255 }, sf::Uint8 { 0 });
     tw->setSkipFrames();
     add(tw);
+
+    m_soundBufferLavaDrop.loadFromFile("assets/lavadrop.wav");
+    m_soundBufferEndGame.loadFromFile("assets/endgame.wav");
+    m_lavaDropSound.setBuffer(m_soundBufferLavaDrop);
+    m_lavaDropSound.setVolume(50);
+    m_endGameSound.setBuffer(m_soundBufferEndGame);
+    m_endGameSound.setVolume(30);
 
     doCreateInternal();
     add(m_hud);

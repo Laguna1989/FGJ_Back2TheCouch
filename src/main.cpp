@@ -25,6 +25,7 @@ int main()
         std::cerr << "cannot load music file!\n";
     }
     music.setLoop(true);
+    music.setVolume(15);
     music.play();
 
     while (window->isOpen()) {

@@ -56,7 +56,7 @@ public:
 
     static float ShotVelocityStart() { return 220; };
     static float ShotVelocityMax() { return 325; };
-    static float ShotTimer() { return 0.25; };
+    static float ShotTimer() { return 0.33; };
     static float ShotInvincibleTime() { return 0.1f; };
     static float ShotKnockbackHorizontal() { return 45000.0f; };
     static float ShotKnockbackVertical() { return 25000.0f; };
@@ -67,7 +67,7 @@ public:
     static float LavaStartTime() { return 10.0f; };
     static float LavaStopTime() { return 75.0f; };
     static float TotalGameTime() { return 90.0f; };
-    static float ReturnToCouchTime() { return 80.0f; };
+    static float ReturnToCouchTime() { return 3.0f; };
     static int PointsForHit() { return 1; };
     static int PointsForOtherPlayerDyingInAFire() { return 4; };
     static int PointsForReturningToTheCouch() { return 40; };
