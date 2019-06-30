@@ -56,6 +56,7 @@ private:
     virtual void doCreateInternal();
 
     virtual void doInternalUpdate(float const elapsed) override;
+    void CheckForTimeEnd();
     virtual void doInternalDraw() const override;
 
     void AddPlayer(int id);

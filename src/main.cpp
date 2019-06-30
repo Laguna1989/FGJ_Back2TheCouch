@@ -21,8 +21,10 @@ int main()
     JamTemplate::TextureManager::addselectiveColorReplacement(1, { std::make_pair(sf::Color { 23, 255, 0 }, GP::Player2PrimaryColor()), std::make_pair(sf::Color { 255, 0, 139 }, GP::Player2SecondaryColor()), std::make_pair(sf::Color { 101, 0, 55 }, GP::Player2TertiaryColor()) });
 
     sf::Music music;
-    if (!music.openFromFile("assets/music_loop.ogg"))
+    if (!music.openFromFile("assets/music_loop.ogg")) {
         std::cerr << "cannot load music file!\n";
+    }
+    music.setLoop(true);
     music.play();
 
     while (window->isOpen()) {

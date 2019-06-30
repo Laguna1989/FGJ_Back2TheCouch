@@ -50,21 +50,23 @@ void Player::doCreate()
 
 void Player::doUpdate(float const elapsed)
 {
-    updateShot(elapsed);
-    updateMovement(elapsed);
+    if (m_active) {
+        updateShot(elapsed);
+        updateMovement(elapsed);
 
-    updateAnimation();
-    m_sprite->update(elapsed);
-    m_sprite->setPosition(getPosition());
+        updateAnimation();
+        m_sprite->update(elapsed);
+        m_sprite->setPosition(getPosition());
 
-    m_closeCombatAttackArea->setPosition(getPosition());
-    m_closeCombatAttackArea->update(elapsed);
+        m_closeCombatAttackArea->setPosition(getPosition());
+        m_closeCombatAttackArea->update(elapsed);
 
-    if (getPosition().x <= 0) {
-        setPosition(sf::Vector2f(0, getPosition().y));
-    }
-    if (getPosition().x >= getGame()->getRenderTarget()->getSize().x - GP::SpriteSize()) {
-        setPosition(sf::Vector2f(getGame()->getRenderTarget()->getSize().x - GP::SpriteSize(), getPosition().y));
+        if (getPosition().x <= 0) {
+            setPosition(sf::Vector2f(0, getPosition().y));
+        }
+        if (getPosition().x >= getGame()->getRenderTarget()->getSize().x - GP::SpriteSize()) {
+            setPosition(sf::Vector2f(getGame()->getRenderTarget()->getSize().x - GP::SpriteSize(), getPosition().y));
+        }
     }
 }
 

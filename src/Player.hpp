@@ -21,10 +21,13 @@ public:
     void getHitByShot(std::shared_ptr<Shot> shot);
     int getId() { return m_id; };
 
+    void Deactivate() { m_active = false; }
+
 private:
     StateGame& m_gameState;
     int m_id { 0 };
     PlayerInput m_input;
+    bool m_active { true };
 
     JamTemplate::Animation::Sptr m_sprite;
 
