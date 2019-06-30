@@ -50,6 +50,8 @@ void StateMenu::doCreate()
     m_title = std::make_shared<JamTemplate::SmartSprite>();
     m_title->loadSprite("assets/grounded.logo.png");
     m_title->setPosition(sf::Vector2f { wC, h / 2 });
+    //m_title->setOrigin(sf::Vector2f { m_title->getLocalBounds().width / 2, m_title->getLocalBounds().height / 2 });
+    //m_title->setScale(sf::Vector2f { 2.0f, 2.0f });
     m_title->setOffset(sf::Vector2f { -m_title->getLocalBounds().width / 2, -m_title->getLocalBounds().height / 2 });
     m_title->update(0.0f);
 
