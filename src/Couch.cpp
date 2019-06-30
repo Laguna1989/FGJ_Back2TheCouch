@@ -17,6 +17,7 @@ void Couch::doCreate()
     m_sprite = std::make_shared<JamTemplate::SmartSprite>();
     m_sprite->loadSprite("assets/couch.png");
     setPosition(GP::CouchSpawnPosition());
+    m_sprite->update(0.0f);
 }
 
 void Couch::doUpdate(float const elapsed)
