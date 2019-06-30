@@ -58,8 +58,8 @@ public:
     static float ShotVelocityMax() { return 325; };
     static float ShotTimer() { return 0.33; };
     static float ShotInvincibleTime() { return 0.1f; };
-    static float ShotKnockbackHorizontal() { return 45000.0f; };
-    static float ShotKnockbackVertical() { return 25000.0f; };
+    static float ShotKnockbackHorizontal() { return 90000.0f; };
+    static float ShotKnockbackVertical() { return 50000.0f; };
     static float ShotRecoilHorizontal() { return 8000.0f; };
     static float ShotRecoilVertical() { return 10000.0f; };
 

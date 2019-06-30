@@ -82,6 +82,9 @@ void StateGame::CollideShotsPlayers(std::shared_ptr<Shot> shot)
         if (player == nullptr) {
             continue;
         }
+        if (shot->getAge() <= 0.5f && shot->m_firedBy == player->getId()) {
+            continue;
+        }
         if (JamTemplate::Collision::BoundingBoxTest(shot->getSprite(), player->getSprite())) {
             shot->Collide();
             player->getHitByShot(shot);
@@ -156,7 +159,7 @@ void StateGame::doCreate()
     m_lavaDropSound.setBuffer(m_soundBufferLavaDrop);
     m_lavaDropSound.setVolume(50);
     m_endGameSound.setBuffer(m_soundBufferEndGame);
-    m_endGameSound.setVolume(30);
+    m_endGameSound.setVolume(15);
 
     doCreateInternal();
     add(m_hud);

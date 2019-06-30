@@ -38,6 +38,8 @@ public:
     bool m_collided { false };
     bool m_movementStarted { false };
 
+    int m_firedBy { 0 };
+
 private:
     JamTemplate::Animation::Sptr m_sprite;
 

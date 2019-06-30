@@ -171,6 +171,7 @@ void Player::SpawnShot()
     }
     getB2Body()->ApplyLinearImpulseToCenter(recoilImpulse, true);
     std::shared_ptr<Shot> shot = std::make_shared<Shot>(m_gameState);
+    shot->m_firedBy = m_id;
     shot->setPosition(getPosition() + ofs);
     shot->setVelocity(vel);
     shot->setAcceleration(sf::Vector2f { vel.x / GP::ShotVelocityStart() * 300, 0 });
