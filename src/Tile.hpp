@@ -13,7 +13,9 @@
 
 namespace TileType {
 enum TileType {
-    Platform
+    PlatformFull,
+    PlatformHalf,
+    PlatformQuart,
 };
 }
 
@@ -32,17 +34,27 @@ public:
     int X() { return m_x; }
     int Y() { return m_y; }
 
-    virtual void SetTexture() { m_sprite->loadSprite("assets/tile.png"); }
+    virtual void SetTexture()
+    {
+        m_sprite->loadSprite("assets/tile.png");
+        if (m_type == TileType::TileType::PlatformHalf) {
+            m_sprite->setScale(sf::Vector2f { 1, 0.5f });
+        } else if (m_type == TileType::TileType::PlatformQuart) {
+            m_sprite->setScale(sf::Vector2f { 1, 0.25f });
+        }
+    }
 
     TileType::TileType Type() { return m_type; }
 
     JamTemplate::SmartSprite::Sptr getSprite() { return m_sprite; };
 
 private:
+    sf::Vector2f m_HitBoxOffset { 0, 0 };
+    sf::Vector2f m_offsetSpr { 0, 0 };
     void updatePosition()
     {
-        setPosition(sf::Vector2f(static_cast<float>(m_x * GP::SpriteSize()), static_cast<float>(m_y * static_cast<int>(GP::SpriteSize()))));
-        m_sprite->setPosition(getPosition());
+        setPosition(m_offsetSpr + sf::Vector2f(static_cast<float>(m_x * GP::SpriteSize()), static_cast<float>(m_y * static_cast<int>(GP::SpriteSize()))));
+        m_sprite->setPosition(getPosition() - m_HitBoxOffset);
     }
 
     void doCreate() override
@@ -53,13 +65,20 @@ private:
         setB2Obj();
 
         updatePosition();
+        m_sprite->setColor(sf::Color { 0, 0, 0, 0 });
     }
 
     void doUpdate(const float elapsed) override
     {
         m_sprite->update(elapsed);
+        if (JamTemplate::InputManager::justPressed(sf::Keyboard::Key::F6)) {
+            if (m_sprite->getColor() == sf::Color::White) {
+                m_sprite->setColor(sf::Color { 0, 0, 0, 0 });
+            } else {
+                m_sprite->setColor(sf::Color::White);
+            }
+        }
     }
-
     void doDraw() const override
     {
         m_sprite->draw(getGame()->getRenderTarget());
@@ -77,7 +96,20 @@ private:
     void setB2Obj()
     {
         b2PolygonShape dynamicBox;
-        dynamicBox.SetAsBox(static_cast<float32>(GP::SpriteSize()) / 2.0f, static_cast<float32>(GP::SpriteSize()) / 2.0f);
+        float32 ss = static_cast<float32>(GP::SpriteSize());
+
+        if (m_type == TileType::TileType::PlatformHalf) {
+            dynamicBox.SetAsBox(ss / 4.0f, ss / 4.0f);
+            m_HitBoxOffset = sf::Vector2f { 0, -ss / 8 };
+            m_offsetSpr = sf::Vector2f { 0, -2 };
+
+        } else if (m_type == TileType::TileType::PlatformQuart) {
+            dynamicBox.SetAsBox(ss / 4.0f, ss / 4.0f);
+            m_offsetSpr = sf::Vector2f { 0, -2 };
+            m_HitBoxOffset = sf::Vector2f { 0, -ss / 8 };
+        } else {
+            dynamicBox.SetAsBox(ss / 2.0f, ss / 2.0f);
+        }
 
         b2FixtureDef fixtureDef;
 

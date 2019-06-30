@@ -49,6 +49,7 @@ private:
     JamTemplate::ObjectGroup<Player>::Sptr m_players;
     JamTemplate::ObjectGroup<Shot>::Sptr m_shots;
     std::shared_ptr<Level> m_level;
+    bool m_switching { false };
 
     void doCreate() override;
 

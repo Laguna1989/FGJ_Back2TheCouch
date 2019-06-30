@@ -141,7 +141,7 @@ void Player::SpawnShot()
 {
     m_shotTimer = GP::ShotTimer();
     sf::Vector2f ofs { 0, -4 };
-    sf::Vector2f vel { GP::ShotVelocity(), JamTemplate::Random::getFloat(-10, 5) };
+    sf::Vector2f vel { GP::ShotVelocityStart(), JamTemplate::Random::getFloat(-10, 5) };
     b2Vec2 recoilImpulse;
     if (m_facingRight) {
         ofs.x += GP::SpriteSize();
@@ -155,6 +155,9 @@ void Player::SpawnShot()
     std::shared_ptr<Shot> shot = std::make_shared<Shot>(m_gameState);
     shot->setPosition(getPosition() + ofs);
     shot->setVelocity(vel);
+    shot->setAcceleration(sf::Vector2f { vel.x / GP::ShotVelocityStart() * 300, 0 });
+    auto svm = GP::ShotVelocityMax();
+    shot->setBoundsVelocity(sf::FloatRect(-svm, -svm, 2 * svm, 2 * svm));
 
     m_gameState.SpawnShot(shot);
 }

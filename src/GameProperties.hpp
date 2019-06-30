@@ -54,7 +54,8 @@ public:
     static float TileFriction() { return 0.48f; };
     static float TileDensity() { return 1.0f; };
 
-    static float ShotVelocity() { return 275; };
+    static float ShotVelocityStart() { return 220; };
+    static float ShotVelocityMax() { return 325; };
     static float ShotTimer() { return 0.25; };
     static float ShotInvincibleTime() { return 0.1f; };
     static float ShotKnockbackHorizontal() { return 45000.0f; };
@@ -62,10 +63,10 @@ public:
     static float ShotRecoilHorizontal() { return 8000.0f; };
     static float ShotRecoilVertical() { return 10000.0f; };
 
-    static float LavaRiseSpeed() { return 5.0f; };
-    static float LavaStartTime() { return 2.0f; };
-    static float LavaStopTime() { return 25.0f; };
-    static float TotalGameTime() { return 50.0f; };
+    static float LavaRiseSpeed() { return 2.3f; };
+    static float LavaStartTime() { return 20.0f; };
+    static float LavaStopTime() { return 85.0f; };
+    static float TotalGameTime() { return 90.0f; };
 
     static int PointsForHit() { return 1; };
     static int PointsForOtherPlayerDyingInAFire() { return 4; };

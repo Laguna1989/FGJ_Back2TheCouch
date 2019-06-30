@@ -7,11 +7,21 @@
 #include "JamTemplate/SmartShape.hpp"
 #include "JamTemplate/SmartSprite.hpp"
 #include "JamTemplate/TweenAlpha.hpp"
+#include "StateMenu.hpp"
 
 void StateGame::doInternalUpdate(float const elapsed)
 {
     m_overlay->update(elapsed);
     m_world->Step(elapsed, GP::PhysicVelocityIterations(), GP::PhysicPositionIterations());
+
+    if (!m_switching) {
+        if (GP::TotalGameTime() - getAge() < 0) {
+            m_switching = true;
+            auto tw = JamTemplate::TweenAlpha<JamTemplate::SmartShape>::create(m_overlay, 0.75f, sf::Uint8 { 0 }, sf::Uint8 { 255 });
+            tw->addCompleteCallback([this]() { getGame()->switchState(std::make_shared<StateMenu>()); });
+            add(tw);
+        }
+    }
 
     for (auto s : *m_shots) {
         auto shot = s.lock();
@@ -66,8 +76,8 @@ void StateGame::doInternalDraw() const
     m_level->m_backgroundImage->draw(getGame()->getRenderTarget());
     m_couch->draw();
     drawObjects();
-    m_overlay->draw(getGame()->getRenderTarget());
     m_lava->draw();
+    m_overlay->draw(getGame()->getRenderTarget());
     m_hud->draw();
 }
 
