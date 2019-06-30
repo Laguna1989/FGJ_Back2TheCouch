@@ -17,20 +17,24 @@ void Level::LoadLevel(std::string const& fileName)
     auto levelImage = JamTemplate::TextureManager::get(fileName).copyToImage();
     // border
     for (int i = -1; i != static_cast<int>(levelImage.getSize().x); ++i) {
-        AddTile(i, -1, TileType::TileType::Platform);
-        AddTile(i, levelImage.getSize().y, TileType::TileType::Platform);
+        AddTile(i, -1, TileType::TileType::PlatformFull);
+        AddTile(i, levelImage.getSize().y, TileType::TileType::PlatformFull);
     }
     for (int j = -1; j != static_cast<int>(levelImage.getSize().y); ++j) {
-        AddTile(-1, j, TileType::TileType::Platform);
-        AddTile(levelImage.getSize().x, j, TileType::TileType::Platform);
+        AddTile(-1, j, TileType::TileType::PlatformFull);
+        AddTile(levelImage.getSize().x, j, TileType::TileType::PlatformFull);
     }
     // image
     for (unsigned int x = 0; x != levelImage.getSize().x; ++x) {
         for (unsigned int y = 0; y != levelImage.getSize().y; ++y) {
             sf::Color c = levelImage.getPixel(x, y);
 
-            if (c == sf::Color::White) {
-                AddTile(x, y, TileType::TileType::Platform);
+            if (c == sf::Color { 255, 255, 255 }) {
+                AddTile(x, y, TileType::TileType::PlatformFull);
+            } else if (c == sf::Color { 128, 128, 128 }) {
+                AddTile(x, y, TileType::TileType::PlatformHalf);
+            } else if (c == sf::Color { 64, 64, 64 }) {
+                AddTile(x, y, TileType::TileType::PlatformQuart);
             }
             if (c.r == 1 && c.g == 255 && c.b == 0) {
                 m_spawnPositions.emplace_back(sf::Vector2i { static_cast<int>(x), static_cast<int>(y) });
@@ -45,7 +49,7 @@ void Level::AddTile(int x, int y, TileType::TileType type)
     wallBodyDef.fixedRotation = true;
     wallBodyDef.allowSleep = false;
 
-    std::shared_ptr<Tile> t = std::make_shared<Tile>(x, y, TileType::TileType::Platform, &wallBodyDef, m_gameState.getWorld());
+    std::shared_ptr<Tile> t = std::make_shared<Tile>(x, y, type, &wallBodyDef, m_gameState.getWorld());
 
     m_tiles->emplace_back(t);
     m_gameState.add(t);
@@ -64,7 +68,6 @@ void Level::doUpdate(float const elapsed)
 }
 void Level::doDraw() const
 {
-    //m_backgroundImage->draw(getGame()->getRenderTarget());
 }
 
 sf::Vector2f Level::getSpawnPosition(int id) const

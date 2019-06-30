@@ -74,6 +74,7 @@ void StateGame::doInternalUpdate(float const elapsed)
 void StateGame::doInternalDraw() const
 {
     m_level->m_backgroundImage->draw(getGame()->getRenderTarget());
+
     drawObjects();
     m_lava->draw();
     m_overlay->draw(getGame()->getRenderTarget());
