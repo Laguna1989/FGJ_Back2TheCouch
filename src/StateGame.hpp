@@ -1,6 +1,7 @@
 #ifndef GAME_STATE_GAME_HPP_INCLUDEGUARD
 #define GAME_STATE_GAME_HPP_INCLUDEGUARD
 
+#include "Couch.hpp"
 #include "JamTemplate/GameState.hpp"
 #include "JamTemplate/ObjectGroup.hpp"
 #include "Lava.hpp"
@@ -35,12 +36,15 @@ public:
         m_shots->emplace_back(shot);
     }
 
+    float getLavaHeight() { return m_lava->getHeight(); };
+
 protected:
     std::shared_ptr<Hud> m_hud;
 
 private:
     std::shared_ptr<b2World> m_world { nullptr };
     std::shared_ptr<Lava> m_lava;
+    std::shared_ptr<Couch> m_couch;
     std::shared_ptr<JamTemplate::SmartShape> m_overlay;
     JamTemplate::ObjectGroup<Player>::Sptr m_players;
     JamTemplate::ObjectGroup<Shot>::Sptr m_shots;

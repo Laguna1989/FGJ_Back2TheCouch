@@ -6,6 +6,8 @@ cmake_minimum_required (VERSION 2.6)
 set (PROJECTNAME "Back2TheCouch") 
 
 set (GAMEFILES 
+	src/Couch.hpp
+	src/Couch.cpp
 	src/GameProperties.hpp
 	src/GameProperties.cpp
 	src/Hud.hpp
