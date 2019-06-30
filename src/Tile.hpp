@@ -65,6 +65,7 @@ private:
         setB2Obj();
 
         updatePosition();
+        m_sprite->setColor(sf::Color { 0, 0, 0, 0 });
     }
 
     void doUpdate(const float elapsed) override

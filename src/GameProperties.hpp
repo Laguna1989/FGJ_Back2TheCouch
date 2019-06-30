@@ -63,7 +63,7 @@ public:
     static float ShotRecoilHorizontal() { return 8000.0f; };
     static float ShotRecoilVertical() { return 10000.0f; };
 
-    static float LavaRiseSpeed() { return 5.0f; };
+    static float LavaRiseSpeed() { return 2.3f; };
     static float LavaStartTime() { return 20.0f; };
     static float LavaStopTime() { return 85.0f; };
     static float TotalGameTime() { return 90.0f; };
