@@ -15,27 +15,36 @@ void StateGame::doInternalUpdate(float const elapsed)
     m_world->Step(elapsed, GP::PhysicVelocityIterations(), GP::PhysicPositionIterations());
 
     if (!m_switching) {
-        if (GP::TotalGameTime() - getAge() < 0) {
-            m_switching = true;
-            auto tw = JamTemplate::TweenAlpha<JamTemplate::SmartShape>::create(m_overlay, 0.75f, sf::Uint8 { 0 }, sf::Uint8 { 255 });
-            tw->addCompleteCallback([this]() { getGame()->switchState(std::make_shared<StateMenu>()); });
-            add(tw);
+
+        CheckForTimeEnd();
+
+        for (auto s : *m_shots) {
+            auto shot = s.lock();
+            if (shot == nullptr) {
+                continue;
+            }
+            if (shot->isShotInValid()) {
+                continue;
+            }
+            CollideShotsTiles(shot);
+            CollideShotsPlayers(shot);
+        }
+
+        CollidePlayersLava();
+    }
+}
+
+void StateGame::CheckForTimeEnd()
+{
+    if (GP::TotalGameTime() - getAge() < 0) {
+        m_switching = true;
+        auto tw = JamTemplate::TweenAlpha<JamTemplate::SmartShape>::create(m_overlay, 1.25f, sf::Uint8 { 0 }, sf::Uint8 { 255 });
+        tw->addCompleteCallback([this]() { getGame()->switchState(std::make_shared<StateMenu>()); });
+        add(tw);
+        for (auto p : *m_players) {
+            p.lock()->Deactivate();
         }
     }
-
-    for (auto s : *m_shots) {
-        auto shot = s.lock();
-        if (shot == nullptr) {
-            continue;
-        }
-        if (shot->isShotInValid()) {
-            continue;
-        }
-        CollideShotsTiles(shot);
-        CollideShotsPlayers(shot);
-    }
-
-    CollidePlayersLava();
 }
 
 void StateGame::CollideShotsTiles(std::shared_ptr<Shot> shot)
