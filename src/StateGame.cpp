@@ -32,6 +32,11 @@ void StateGame::doInternalUpdate(float const elapsed)
 
         CollidePlayersLava();
     }
+    if (!m_returnToCouch && getAge() >= GP::ReturnToCouchTime()) {
+        m_returnToCouch = true;
+        m_hud->setReturnToCouchTextVisible(true);
+        // TODO: Enable high scoring + game end on couch collision
+    }
 }
 
 void StateGame::CheckForTimeEnd()

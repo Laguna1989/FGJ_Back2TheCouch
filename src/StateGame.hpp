@@ -50,6 +50,7 @@ private:
     JamTemplate::ObjectGroup<Shot>::Sptr m_shots;
     std::shared_ptr<Level> m_level;
     bool m_switching { false };
+    bool m_returnToCouch { false };
 
     void doCreate() override;
 

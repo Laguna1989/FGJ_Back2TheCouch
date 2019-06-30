@@ -11,14 +11,17 @@ public:
 
     void AddScoreP1(int i = 1);
     void AddScoreP2(int i = 1);
+    void setReturnToCouchTextVisible(bool visible) { m_showReturnToCouchText = visible; };
 
 private:
     int m_scoreP1 { 0 };
     int m_scoreP2 { 0 };
+    bool m_showReturnToCouchText { false };
 
     JamTemplate::SmartText::Sptr m_scoreP1Text;
     JamTemplate::SmartText::Sptr m_scoreP2Text;
     JamTemplate::SmartText::Sptr m_timerText;
+    JamTemplate::SmartText::Sptr m_returnToCouchText;
 
     void doUpdate(float const elapsed) override;
 

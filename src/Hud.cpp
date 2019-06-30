@@ -28,20 +28,23 @@ void Hud::doUpdate(float const elapsed)
     m_scoreP2Text->setText(std::to_string(m_scoreP2));
     m_scoreP1Text->update(elapsed);
     m_scoreP2Text->update(elapsed);
+    m_returnToCouchText->update(elapsed);
     int secondsLeft = static_cast<int>(GP::TotalGameTime() - getAge());
     m_timerText->setText(std::to_string(MH::clamp(secondsLeft, 0, INT_MAX)));
     m_timerText->update(elapsed);
     float center = GP::PlayfieldWidth() / (2.0f * GP::PixelScalingFactor());
     auto textBoundingBox = m_timerText->getGlobalBounds();
-    m_timerText->setPosition({ center /*- (textBoundingBox.width / 2.0f)*/, 10 });
+    m_timerText->setPosition({ center, 10 });
 }
 
 void Hud::doDraw() const
 {
     m_scoreP1Text->draw(getGame()->getRenderTarget());
     m_scoreP2Text->draw(getGame()->getRenderTarget());
-
     m_timerText->draw(getGame()->getRenderTarget());
+    if (m_showReturnToCouchText) {
+        m_returnToCouchText->draw(getGame()->getRenderTarget());
+    }
 }
 
 void Hud::doCreate()
@@ -71,4 +74,14 @@ void Hud::doCreate()
     m_timerText->setOutline(2, sf::Color { 60, 60, 70 });
     m_timerText->SetTextAlign(JamTemplate::SmartText::TextAlign::CENTER);
     m_timerText->update(0.0f);
+
+    m_returnToCouchText = std::make_shared<JamTemplate::SmartText>();
+    m_returnToCouchText->loadFont("assets/font.ttf");
+    m_returnToCouchText->setCharacterSize(18U);
+    m_returnToCouchText->setColor(sf::Color { 248, 249, 254 });
+    m_returnToCouchText->setOutline(2, sf::Color { 20, 30, 140 });
+    m_returnToCouchText->SetTextAlign(JamTemplate::SmartText::TextAlign::CENTER);
+    m_returnToCouchText->setText("Back to the Couch!");
+    m_returnToCouchText->setPosition({ getGame()->getRenderTarget()->getSize().x / 2.0f, getGame()->getRenderTarget()->getSize().y / 2.0f });
+    m_returnToCouchText->update(0.0f);
 }
