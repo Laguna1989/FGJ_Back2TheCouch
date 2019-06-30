@@ -1,3 +1,4 @@
+#include "StateHighScore.hpp"
 #include "GameProperties.hpp"
 #include "JamTemplate/Game.hpp"
 #include "JamTemplate/SmartShape.hpp"
@@ -6,14 +7,13 @@
 #include "JamTemplate/TweenAlpha.hpp"
 #include "JamTemplate/TweenPosition.hpp"
 #include "JamTemplate/TweenScale.hpp"
-#include "StateGame.hpp"
 #include "StateMenu.hpp"
 
 StateHighscore::StateHighscore(int p1Points, int p2Points)
 {
 }
 
-void StateMenu::doInternalUpdate(float const elapsed)
+void StateHighscore::doInternalUpdate(float const elapsed)
 {
     if (!m_starting) {
         using ip = JamTemplate::InputManager;
@@ -24,7 +24,7 @@ void StateMenu::doInternalUpdate(float const elapsed)
             m_starting = true;
             auto tw = JamTemplate::TweenAlpha<JamTemplate::SmartShape>::create(m_overlay, 0.5f, sf::Uint8 { 0 }, sf::Uint8 { 255 });
             tw->setSkipFrames();
-            tw->addCompleteCallback([this]() { getGame()->switchState(std::make_shared<StateGame>()); });
+            tw->addCompleteCallback([this]() { getGame()->switchState(std::make_shared<StateMenu>()); });
             add(tw);
         }
 
@@ -33,16 +33,11 @@ void StateMenu::doInternalUpdate(float const elapsed)
     }
 }
 
-void StateMenu::doCreate()
+void StateHighscore::doCreate()
 {
     float w = static_cast<float>(getGame()->getRenderTarget()->getSize().x);
     float h = static_cast<float>(getGame()->getRenderTarget()->getSize().y);
     float wC = w / 2;
-
-    m_background = std::make_shared<JamTemplate::SmartShape>();
-    m_background->makeRect({ w, h });
-    m_background->setColor(GP::PaletteBackground());
-    m_background->update(0.0f);
 
     m_text_Title = std::make_shared<JamTemplate::SmartText>();
     m_text_Title->loadFont("assets/font.ttf");
@@ -99,9 +94,9 @@ void StateMenu::doCreate()
         add(tw2);
     }
 }
-void StateMenu::doInternalDraw() const
+void StateHighscore::doInternalDraw() const
 {
-    m_background->draw(getGame()->getRenderTarget());
+    //m_background->draw(getGame()->getRenderTarget());
 
     float w = static_cast<float>(getGame()->getRenderTarget()->getSize().x);
     float wC = w / 2;
