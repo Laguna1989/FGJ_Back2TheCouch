@@ -145,12 +145,12 @@ void Player::updateMovement(float const elapsed)
     getB2Body()->SetLinearVelocity(b2Vec2 { actualVelX, actualVelY });
 
     float vl = JamTemplate::MathHelper::length(vel);
-
+    /*
     if (std::fabs(vl) > 0.005f) // do exponential damping
     {
-        float d = 1.0f - GP::SpriteLinearDamping();
+        float d = (1.0f - GP::SpriteLinearDamping() * frameRateCorrection);
         getB2Body()->SetLinearVelocity(b2Vec2 { vel.x * d, vel.y * d });
-    }
+    }*/
 }
 
 void Player::SpawnShot()

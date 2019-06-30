@@ -41,7 +41,7 @@ public:
     static float PhysicsGravity() { return 1200.0f; };
 
     static unsigned int SpriteSize() { return 12; };
-    static float SpriteLinearDamping() { return 0.085f; };
+    static float SpriteLinearDamping() { return 6.0f; };
 
     static float PlayerMovementAcceleration() { return 67000.0f; };
     static float PlayerFriction() { return 0.01f; };
